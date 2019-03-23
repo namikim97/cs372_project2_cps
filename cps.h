@@ -9,6 +9,9 @@
 #ifndef CPS_H_INCLUDED
 #define CPS_H_INCLUDED
 
+#include <string> //for std::string
+
+
 // Nami 
 class Shape {
 	// TO DO
@@ -45,7 +48,15 @@ class Spacer : public Shape
 // Alex
 class Square : public Polygon
 {
-	// TO DO
+public:
+	Square(double sideLength) : _sideLength{ sideLength } {};
+
+	void generatePS() {
+
+	}
+
+private:
+	double _sideLength;
 ;
 
 // Alex
