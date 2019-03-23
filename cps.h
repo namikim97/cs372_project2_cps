@@ -9,6 +9,7 @@
 #ifndef CPS_H_INCLUDED
 #define CPS_H_INCLUDED
 
+#include <vector> //for std::vector
 #include <string> //for std::string
 
 
@@ -51,10 +52,14 @@ class Square : public Polygon
 public:
 	Square(double sideLength) : _sideLength{ sideLength } {};
 
-	void generatePS() {
-
+	/*  #not sure if this fucn should return a vector<string> a stream, or something else.
+	std::vector<std::string> generatePS() {
+		std::vector<std::string> psCode[6];
+		psCode->push_back("newpath");
+		psCode->push_back()
+		
 	}
-
+	*/
 private:
 	double _sideLength;
 ;
