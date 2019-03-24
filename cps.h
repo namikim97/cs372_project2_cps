@@ -12,6 +12,7 @@
 #include <string>
 using std::string;
 #include <math.h>
+#include <vector>
 
 // Nami 
 class Shape
@@ -34,10 +35,15 @@ protected:
 
 	//for testing later
 	//string drawShape(const shape &s, int x, int y);
+
+// Nami 
+class Shape {
+	// TO DO
 };
 
 // Basic Shapes
 
+// Nami
 class Circle : public Shape
 {
 public:
@@ -83,6 +89,7 @@ private:
 // Simeon
 class Rectangle : public Shape
 {
+
 	// TO DO
 }; 
 
@@ -92,11 +99,24 @@ class Spacer : public Shape
 	// TO DO
 };
 
+
 // Alex
 class Square : public Polygon
 {
-	// TO DO
-};
+public:
+	Square(double sideLength) : _sideLength{ sideLength } {};
+
+	/*  #not sure if this fucn should return a vector<string> a stream, or something else.
+	std::vector<std::string> generatePS() {
+		std::vector<std::string> psCode[6];
+		psCode->push_back("newpath");
+		psCode->push_back()
+		
+	}
+	*/
+private:
+	double _sideLength;
+;
 
 // Alex
 class Triangle : public Polygon
