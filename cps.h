@@ -9,45 +9,97 @@
 #ifndef CPS_H_INCLUDED
 #define CPS_H_INCLUDED
 
+#include <string>
+using std::string;
+#include <math.h>
+
 // Nami 
-class shape {
-	// TO DO
+class Shape
+{
+public:
+
+	virtual double getHeight() const;
+	virtual double getWidth() const;
+	virtual string getPostScriptCode() const = 0;
+
+private:
+
+	double _height;
+	double _width;
+
+protected:
+
+	void setHeight(double height);
+	void setWidth(double width);
+
+	//for testing later
+	//string drawShape(const shape &s, int x, int y);
 };
 
 // Basic Shapes
 
-// Nami
-class circle : public shape
+class Circle : public Shape
 {
-	// TO DO
+public:
+
+	Circle(double radius);
+	double getRadius() const;
+	string getPostScriptCode() const override;
+
+private:
+
+	double _radius;
 }; 
 
 // Nami
-class polygon : public shape
+class Polygon : public Shape
 {
-	// TO DO
+public:
+
+	Polygon(int numOfSides, double sideLength);
+	double calcTriHeight();
+	double calcTriHypot();
+	double calcHeight();
+	double calcWidth();
+	double calcInnerAngle();
+	int getNumOfSides() const;
+	double getSideLength() const;
+	double getTriHeight() const;
+	double getTriHypot() const;
+	double getInnerAngle() const;
+
+	string getPostScriptCode() const override;
+
+private:
+
+	int _numOfSides;
+	double _sideLength;
+	double _triHeight;
+	double _triHypot;
+	double _innerAngle;
+
 };
 
 // Simeon
-class rectangle : public shape
+class Rectangle : public Shape
 {
 	// TO DO
 }; 
 
 // Simeon
-class spacer : public shape
+class Spacer : public Shape
 {
 	// TO DO
 };
 
 // Alex
-class square : public polygon
+class Square : public Polygon
 {
 	// TO DO
 };
 
 // Alex
-class triangle : public polygon
+class Triangle : public Polygon
 {
 	// TO DO
 };
@@ -55,27 +107,27 @@ class triangle : public polygon
 
 // Compound Shapes
 
-class rotated : public shape
+class Rotated : public Shape
 {
 	// TO DO
 };
 
-class scaled : public shape
+class Scaled : public Shape
 {
 	// TO DO
 };
 
-class layered : public shape
+class Layered : public Shape
 {
 	// TO DO
 };
 
-class vertical : public shape
+class Vertical : public Shape
 {
 	// TO DO
 };
 
-class horizontal : public shape
+class Horizontal : public Shape
 {
 	// TO DO
 };
@@ -83,7 +135,7 @@ class horizontal : public shape
 
 // postscript output
 
-class ps_output
+class PS_Output
 {	
 	// TODO
 };
