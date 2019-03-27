@@ -153,7 +153,7 @@ string Polygon::getPostScriptCode() const
         closepath
         )";
         
-        double SIDESMINUSONE = getNumOfSides() - 1;
+    double SIDESMINUSONE = getNumOfSides() - 1;
     double ROTATIONANGLE = 180 - getInnerAngle();
     
     return retPSCode;
@@ -203,22 +203,46 @@ void PSOutput::addPage(const Page &p)
 void PSOutput::PSOutput_File(string filename)
 {
     ofstream of(filename);
-    of << "%%Pages: " << pages.size() << "\n";
-    of << "%1 \n /inch {72 mul} def \n";
+    of << "%%Pages: " << pages.size() << endl;
+    of << "%1 \n /inch {72 mul} def" << endl;
     int pageNumber = 1;
     for(auto i : pages)
     {
-        of << "%%Page: " << pageNumber << " " << pageNumber << "\n";
+        of << "%%Page: " << pageNumber << " " << pageNumber << endl;
         of << i.getPostScriptCode();
-        of << " \n showpage \n";
+        of << " \n showpage" << endl; 
         ++pageNumber;
     }
     
     of.close();
-    cout << "Postscript Output Successful\n";
+    cout << "Postscript Output Successful" << endl;
 }
+
+void testShapes(void)
+{
+	Circle circle(20);
+	Polygon pentagon(5, 30);
+	//Rectangle recta(20, 30);
+	//Triangle tri(3, 20);
+	//Square sq(20, 20);
+
+	Page basicShapes;
+
+	basicShapes.drawToPage(circle1, 40, 40);
+	basicShapes.drawToPage(pentagon1, 144, 144);
+	// basicShapes.drawToPage(recta, 100, 100);
+	// basicShapes.drawToPage(tri, 200, 200);
+	// basicShapes.drawToPage(sq, 300, 300);
+
+	PSOutput output;
+	output.addPage(basicShapes);
+	cout << "Testing file output" << endl;
+	output.PSOutput_File("testShapes.ps");
+}
+
 
 int main()
 {
+	testShapes();
     return 0;
 }
