@@ -12,24 +12,18 @@
 #include <string>
 using std::string;
 using std::to_string;
-
 #include <math.h>
-
 #include <vector>
 using std::vector;
-
 #include <cmath>
 using std::sin;
 using std::cos;
 using std::abs;
-
 #include<iostream>
 using std::cout;
 using std::endl;
-
 #include<fstream>
 using std::ofstream;
-
 #include<memory>
 using std::shared_ptr;
 using std::make_shared;
