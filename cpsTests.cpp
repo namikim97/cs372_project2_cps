@@ -3,6 +3,8 @@
 
 #define CATCH_CONFIG_MAIN
 #include "catch.hpp"
-
+#include "page.h"
+#include "shapes.h"
+#include "compound.h"
 
 

@@ -1,18 +1,22 @@
 cmake_minimum_required(VERSION 3.0)
-project(cppToPostScript)
-project(cppToPostScriptTests)
+project(cpsMain)
+project(cpsTests)
 
 set(CMAKE_CXX_STANDARD 17)
 
 include_directories(.)
 
 # tests
-add_executable(cppToPostScriptTests
+add_executable(cpsTests
         catch.hpp
-        cps.cpp
-        cps.h cpsTests.cpp)
+        cpsTests.cpp
+        shapes.cpp shapes.h
+        compound.cpp compound.h
+        page.cpp page.h)
 
 # main
-add_executable(cppToPostScript
+add_executable(cpsMain
         cps.cpp
-        cps.h)
+        shapes.cpp shapes.h
+        compound.cpp compound.h
+        page.cpp page.h)

@@ -1,13 +1,8 @@
-// cps.h
-// Project 2 for CS372
-// Alex L, Simeon N, Nami K
-// Created: 20 Mar 2019
-// Modified: 20 Mar 2019
-//
-// Header for CPS
+// shapes.h
+// Header file for Shape classes.
 
-#ifndef CPS_H_INCLUDED
-#define CPS_H_INCLUDED
+#ifndef CPS_SHAPES_H
+#define CPS_SHAPES_H
 
 #include <string>
 using std::string;
@@ -33,15 +28,15 @@ public:
     virtual double getWidth() const;
     virtual string getPostScriptCode() const = 0;
     virtual ~Shape() = default;
-    
+
 private:
     double _height;
     double _width;
-    
+
 protected:
     void setHeight(double height);
     void setWidth(double width);
-    
+
     //for testing later
     //string drawShape(const shape &s, int x, int y);
 };
@@ -55,7 +50,7 @@ public:
     Circle(double radius);
     double getRadius() const;
     string getPostScriptCode() const override;
-    
+
 private:
     double _radius;
 };
@@ -75,9 +70,9 @@ public:
     double getTriHeight() const;
     double getTriHypot() const;
     double getInnerAngle() const;
-    
+
     string getPostScriptCode() const override;
-    
+
 private:
     int _numOfSides;
     double _sideLength;
@@ -89,7 +84,7 @@ private:
 // Simeon
 class Rectangle : public Shape
 {
-    
+
     // TO DO
 };
 
@@ -105,13 +100,13 @@ class Square : public Polygon
 {
 public:
     //Square(double sideLength) : _sideLength{ sideLength } {};
-    
+
     /*  #not sure if this fucn should return a vector<string> a stream, or something else.
      std::vector<std::string> generatePS() {
      std::vector<std::string> psCode[6];
      psCode->push_back("newpath");
      psCode->push_back()
-     
+
      }
      */
 private:
@@ -124,64 +119,4 @@ class Triangle : public Polygon
     // TO DO
 };
 
-
-// Compound Shapes
-
-class Rotated : public Shape
-{
-public:
-    Rotated(const Shape &s, double rotation);
-    string getPostScriptCode() const override;
-    
-private:
-    double _origWidth;
-    double _origHeight;
-    double _rotation;
-    string _postScriptCode;
-};
-
-class Scaled : public Shape
-{
-    // TO DO
-};
-
-class Layered : public Shape
-{
-    // TO DO
-};
-
-class Vertical : public Shape
-{
-    // TO DO
-};
-
-class Horizontal : public Shape
-{
-    // TO DO
-};
-
-
-// postscript output
-
-class Page
-{
-public:
-    void drawToPage(const Shape &s, int x, int y);
-    string getPostScriptCode();
-    
-private:
-    string _postScriptCode;
-};
-
-class PSOutput
-{
-public:
-    void addPage(const Page &p);
-    void PSOutput_File(string filename);
-    
-private:
-    string _postScriptCode;
-    vector<Page> pages;
-};
-
-#endif //CPS_H_INCLUDED
+#endif //CPS_SHAPES_H
