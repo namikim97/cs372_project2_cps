@@ -102,14 +102,15 @@ class Spacer : public Shape
 class Square : public Polygon
 {
 public:
-    Square(int sideLength): Polygon(4, sideLength) {};
+    Square(int sideLength): Polygon(4, sideLength){};
 
 };
 
 // Alex
 class Triangle : public Polygon
 {
-    // TO DO
+public:
+    Triangle(int sideLength): Polygon(3, sideLength){};
 };
 
 #endif //CPS_SHAPES_H
