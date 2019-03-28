@@ -8,3 +8,8 @@
 #include "compound.h"
 
 
+TEST_CASE( "Can make a polygons", "[Polygon]" ) {
+    class Polygon poly(5, 6);
+    REQUIRE( (poly.getNumOfSides()) == 5 );
+
+}
