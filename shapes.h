@@ -7,7 +7,7 @@
 #include <string>
 using std::string;
 using std::to_string;
-#include <math.h>
+//#include <math.h>
 #include <vector>
 using std::vector;
 #include <cmath>
@@ -77,8 +77,8 @@ public:
     string getPostScriptCode() const override;
 
 private:
-    int _numOfSides = 0;  //needed for default ctor
-    double _sideLength = 0; //needed for default ctor
+    int _numOfSides;
+    double _sideLength;
     double _triHeight;
     double _triHypot;
     double _innerAngle;

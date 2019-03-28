@@ -6,6 +6,8 @@
 #include "page.h"
 #include "shapes.h"
 #include "compound.h"
+#include <cmath>
+using std::sqrt;
 
 
 TEST_CASE( "Can make a polygons", "[Polygon]" ) {
@@ -21,8 +23,11 @@ TEST_CASE( "Can make a square", "[Square]" ) {
 }
 
 TEST_CASE( "Can make a triangle", "[Triangle]" ) {
-    class Triangle sq(70);
-    REQUIRE( (sq.getNumOfSides()) == 3 );
-    REQUIRE( (sq.getSideLength()) == 70 );
+    class Triangle tri(4);
+    REQUIRE( (tri.getNumOfSides()) == 3 );
+    REQUIRE( (tri.getSideLength()) == 4 );
+    REQUIRE( (tri.calcTriHypot()) == 2 / (sin(M_PI/3)));
+    //REQUIRE( (tri.calcTriHeight()) ==  tri.calcTriHypot() * cos(M_PI)/3); //this assertion failing
+
 }
 
