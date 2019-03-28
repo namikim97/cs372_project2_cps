@@ -77,8 +77,8 @@ public:
     string getPostScriptCode() const override;
 
 private:
-    int _numOfSides;
-    double _sideLength;
+    int _numOfSides = 0;  //needed for default ctor
+    double _sideLength = 0; //needed for default ctor
     double _triHeight;
     double _triHypot;
     double _innerAngle;
@@ -102,18 +102,8 @@ class Spacer : public Shape
 class Square : public Polygon
 {
 public:
-    //Square(double sideLength) : _sideLength{ sideLength } {};
+    Square(int sideLength): Polygon(4, sideLength) {};
 
-    /*  #not sure if this fucn should return a vector<string> a stream, or something else.
-     std::vector<std::string> generatePS() {
-     std::vector<std::string> psCode[6];
-     psCode->push_back("newpath");
-     psCode->push_back()
-
-     }
-     */
-private:
-    double _sideLength;
 };
 
 // Alex

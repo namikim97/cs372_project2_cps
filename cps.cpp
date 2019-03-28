@@ -11,7 +11,7 @@
 #include "shapes.h"
 #include "compound.h"
 =======
-#include "cps.h"
+//#include "cps.h"
 
 double Shape::getHeight() const
 {
