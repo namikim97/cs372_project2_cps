@@ -20,3 +20,9 @@ TEST_CASE( "Can make a square", "[Square]" ) {
     REQUIRE( (sq.getSideLength()) == 6 );
 }
 
+TEST_CASE( "Can make a triangle", "[Triangle]" ) {
+    class Triangle sq(70);
+    REQUIRE( (sq.getNumOfSides()) == 3 );
+    REQUIRE( (sq.getSideLength()) == 70 );
+}
+
