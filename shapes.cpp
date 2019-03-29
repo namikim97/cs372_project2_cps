@@ -162,9 +162,19 @@ Rectangle::Rectangle(double width, double height) {
 }
 
 string Rectangle::getPostScriptCode() const {
+    string originX = "72", originY = "72";  // TODO: Change this later?
     string strWidth = to_string(getWidth());
     string strHeight = to_string(getHeight());
+    string originXWidthAdd = originX + " " + strWidth + " add ";
+    string originYHeightAdd = originY + " " + strHeight + " add ";
 
+    string PostScriptCode = "newpath\n" +
+                            originX + " " + originY + " moveto\n" +
+                            originXWidthAdd + originY + " lineto\n" +
+                            originXWidthAdd + originYHeightAdd + " lineto\n" +
+                            originX + " " + originYHeightAdd + " lineto\n" +
+                            "closepath\n" +
+                            "stroke\n";
 
-    return "Dummy";
+    return PostScriptCode;
 }

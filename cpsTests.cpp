@@ -20,14 +20,19 @@ TEST_CASE( "Shape: Rectangle ") {
     }
 
     SECTION( "Rectangle: Generates correct PostScript code" ) {
-        REQUIRE( rect.getPostScriptCode() == "newpath\n"
-                                             "72 72 moveto\n"
-                                             "72 72 add 72 lineto\n"
-                                             "72 72 add 72 18 add lineto\n"
-                                             "72 72 18 add lineto\n"
-                                             "72 72 lineto\n"
-                                             "closepath\n"
-                                             "stroke\n");
+        // TODO: Figure out which (x,y) drawing will start at. Default (72, 72)?
+        string originX = "72", originY = "72";
+        string strWidth = to_string(width), strHeight = to_string(height);
+        string originXWidthAdd = originX + " " + strWidth + " add ";
+        string originYHeightAdd = originY + " " + strHeight + " add ";
+
+        REQUIRE( rect.getPostScriptCode() == "newpath\n" +
+                                             originX + " " + originY + " moveto\n" +
+                                             originXWidthAdd + originY + " lineto\n" +
+                                             originXWidthAdd + originYHeightAdd + " lineto\n" +
+                                             originX + " " + originYHeightAdd + " lineto\n" +
+                                             "closepath\n" +
+                                             "stroke\n" );
     }
 }
 
