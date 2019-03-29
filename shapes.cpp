@@ -155,3 +155,12 @@ string Polygon::getPostScriptCode() const
 
     return retPSCode;
 }
+
+Rectangle::Rectangle(double width, double height) {
+    setWidth(width);
+    setHeight(height);
+}
+
+string Rectangle::getPostScriptCode() const {
+    return "Dummy";
+}

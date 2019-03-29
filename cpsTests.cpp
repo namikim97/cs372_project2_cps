@@ -9,6 +9,13 @@
 #include <cmath>
 using std::sqrt;
 
+TEST_CASE( "Shape: Rectangle ") {
+    class Rectangle rect(5, 10);
+    SECTION( "Rectangle: Width = 5, Height = 10" ) {
+        REQUIRE( rect.getWidth() == 5 );
+        REQUIRE( rect.getHeight() == 10 );
+    }
+}
 
 TEST_CASE( "Can make a polygons", "[Polygon]" ) {
     class Polygon poly(5, 6);
