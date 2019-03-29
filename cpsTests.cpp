@@ -36,6 +36,31 @@ TEST_CASE( "Shape: Rectangle ") {
     }
 }
 
+TEST_CASE( "Shape: Spacer ") {
+    double width = 72;
+    double height = 18;
+
+    class Spacer space(width, height);
+    SECTION( "Spacer: ctor -> Width = 72, Height = 18" ) {
+        REQUIRE( space.getWidth() == width );
+        REQUIRE( space.getHeight() == height );
+    }
+
+    SECTION( "Spacer: Generates correct PostScript code" ) {
+        string originX = "72", originY = "72";
+        string strWidth = to_string(width), strHeight = to_string(height);
+        string originXWidthAdd = originX + " " + strWidth + " add ";
+        string originYHeightAdd = originY + " " + strHeight + " add ";
+
+        REQUIRE( space.getPostScriptCode() == "newpath\n" +
+                                              originX + " " + originY + " moveto\n" +
+                                              originXWidthAdd + originY + " lineto\n" +
+                                              originXWidthAdd + originYHeightAdd + " lineto\n" +
+                                              originX + " " + originYHeightAdd + " lineto\n" +
+                                              "closepath\n");
+    }
+}
+
 TEST_CASE( "Can make a polygons", "[Polygon]" ) {
     class Polygon poly(5, 6);
     REQUIRE( (poly.getNumOfSides()) == 5 );

@@ -96,7 +96,10 @@ public:
 // Simeon
 class Spacer : public Shape
 {
-    // TO DO
+public:
+    Spacer(double, double);
+    string getPostScriptCode() const override;
+
 };
 
 
