@@ -10,10 +10,24 @@
 using std::sqrt;
 
 TEST_CASE( "Shape: Rectangle ") {
-    class Rectangle rect(5, 10);
-    SECTION( "Rectangle: Width = 5, Height = 10" ) {
-        REQUIRE( rect.getWidth() == 5 );
-        REQUIRE( rect.getHeight() == 10 );
+    double width = 72;
+    double height = 18;
+
+    class Rectangle rect(width, height);
+    SECTION( "Rectangle: ctor -> Width = 72, Height = 18" ) {
+        REQUIRE( rect.getWidth() == width );
+        REQUIRE( rect.getHeight() == height );
+    }
+
+    SECTION( "Rectangle: Generates correct PostScript code" ) {
+        REQUIRE( rect.getPostScriptCode() == "newpath\n"
+                                             "72 72 moveto\n"
+                                             "72 72 add 72 lineto\n"
+                                             "72 72 add 72 18 add lineto\n"
+                                             "72 72 18 add lineto\n"
+                                             "72 72 lineto\n"
+                                             "closepath\n"
+                                             "stroke\n");
     }
 }
 

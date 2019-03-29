@@ -162,5 +162,9 @@ Rectangle::Rectangle(double width, double height) {
 }
 
 string Rectangle::getPostScriptCode() const {
+    string strWidth = to_string(getWidth());
+    string strHeight = to_string(getHeight());
+
+
     return "Dummy";
 }
