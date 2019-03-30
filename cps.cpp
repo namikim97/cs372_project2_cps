@@ -48,11 +48,20 @@ void testShapes(void)
 	rotatedShapes.drawToPage(rotPent, 55, 55);
 	rotatedShapes.drawToPage(rotHex, 120, 120);
 	rotatedShapes.drawToPage(rotRec, 250, 250);
-	
 
+	Scaled scaCirc(circle1, 2, 1);
+	Scaled scaPenta(pentagon1, 3, 2);
+	Scaled scaRec(rect, 0.5, 0.25);
+
+	Page scaledShapes;
+	scaledShapes.drawToPage(scaCirc, 55, 55);
+	scaledShapes.drawToPage(scaPenta, 120, 120);
+	scaledShapes.drawToPage(scaRec, 220, 220);
+	
 	PSOutput output;
 	output.addPage(basicShapes);
 	output.addPage(rotatedShapes);
+	output.addPage(scaledShapes);
 	cout << "Testing file output" << endl;
 	output.PSOutput_File("testShapes.ps");
 }

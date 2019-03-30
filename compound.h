@@ -28,7 +28,16 @@ private:
 
 class Scaled : public Shape
 {
-    // TO DO
+public:
+    Scaled(const Shape &s, double horScale, double verScale);
+    std::string getPostScriptCode() const override;
+
+private:
+    double _origWidth;
+    double _origHeight;
+    double _horScale;
+    double _verScale;
+    std::string _postScriptCode;
 };
 
 class Layered : public Shape

@@ -6,7 +6,7 @@
 using std::string;
 using std::to_string;
 
-Rotated::Rotated(const Shape&s, double rotation):_rotation(rotation),
+Rotated::Rotated(const Shape &s, double rotation):_rotation(rotation),
                                                  _postScriptCode(s.getPostScriptCode())
 {
     const double radians = (_rotation * 2.0 * M_PI)/360.0;
@@ -22,11 +22,29 @@ string Rotated::getPostScriptCode() const
 {
     string retPSCode;
 
-    retPSCode = to_string((int)_rotation);
-    retPSCode += " rotate \n";
-    retPSCode += _postScriptCode;
+    retPSCode = to_string((int)_rotation) + " rotate \n" + _postScriptCode;
 
     return retPSCode;
 }
+
+Scaled::Scaled(const Shape &s, double horScale, double verScale)
+                :_horScale(horScale), _verScale(verScale), 
+                _origWidth(s.getWidth()), _origHeight(s.getHeight()),
+                _postScriptCode(s.getPostScriptCode())
+{
+    setWidth(_origWidth * horScale);
+    setHeight(_origHeight * verScale);
+}
+
+string Scaled::getPostScriptCode() const
+{
+    string retPSCode;
+
+    retPSCode = to_string(_horScale) + " " + to_string(_verScale) +
+                " scale\n" + _postScriptCode;
+
+    return retPSCode;
+}
+
 
 
