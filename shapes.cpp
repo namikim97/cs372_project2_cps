@@ -41,6 +41,7 @@ string Circle::getPostScriptCode() const
     string retPSCode = R"(
     newpath
     0 0 RAD 0 360 arc
+    stroke
     )";
 
     return retPSCode;
@@ -148,6 +149,7 @@ string Polygon::getPostScriptCode() const
         ROTATIONANGLE rotate
     } for
         closepath
+        stroke
         )";
 
     double SIDESMINUSONE = getNumOfSides() - 1;
@@ -186,9 +188,10 @@ Spacer::Spacer(double width, double height) {
 }
 
 string Spacer::getPostScriptCode() const {
-    string originX = "72", originY = "72";
-    string strWidth = to_string(getWidth());
-    string strHeight = to_string(getHeight());
+    double halfWidth = getWidth()/2, halfHeight = getHeight()/2;
+    string originX = "x " + to_string(halfWidth) + " sub";
+    string originY = "y " + to_string(halfHeight) + " sub";
+    string strWidth = to_string(getWidth()), strHeight = to_string(getHeight());
     string originXWidthAdd = originX + " " + strWidth + " add ";
     string originYHeightAdd = originY + " " + strHeight + " add ";
 
