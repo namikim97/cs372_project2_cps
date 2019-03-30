@@ -10,7 +10,6 @@
 #include "page.h"
 #include "shapes.h"
 #include "compound.h"
-#include "human.h"
 
 #include <string>
 using std::string;
@@ -23,6 +22,7 @@ using std::endl;
 using std::ofstream;
 #include <memory>
 using std::make_shared;
+#include <initializer_list>
 
 
 void testShapes(void)
@@ -31,16 +31,12 @@ void testShapes(void)
 	Polygon pentagon1(5, 30);
 	Polygon hexagon1(6, 20);
 	Rectangle rect(144, 72);
-	Triangle tri(20);
-	Square sq(20);
 
 	Page basicShapes;
 	basicShapes.drawToPage(circle1, 40, 40);
 	basicShapes.drawToPage(pentagon1, 144, 144);
 	basicShapes.drawToPage(hexagon1, 100, 100);
 	basicShapes.drawToPage(rect, 200, 200);
-	basicShapes.drawToPage(tri, 200, 200);
-	basicShapes.drawToPage(sq, 300, 300);
 
 	Rotated rotPent(pentagon1, 20);
 	Rotated rotHex(hexagon1, 15);
@@ -60,37 +56,28 @@ void testShapes(void)
 	scaledShapes.drawToPage(scaPenta, 120, 120);
 	scaledShapes.drawToPage(scaRec, 220, 220);
 
-    shared_ptr<Shape> tRec(new class Rectangle(72,36));
-    shared_ptr<Shape> spc(new class Spacer(18,36));
-    shared_ptr<Shape> bRec(new class Rectangle(36,72));
-    auto list = {tRec, spc, bRec};
-    Vertical vert(list);
+	auto a = make_shared<Rectangle>(30, 30);
+	auto b = make_shared<Rotated>(pentagon1, 60);
+	auto c = make_shared<Circle>(20);
+	auto d = make_shared<Polygon>(5, 20);
 
-    Page verticalShapes;
-    verticalShapes.drawToPage(vert, 50, 50);
-
-//    Human human(360, 1);
-//    Page humanShapes;
-//    humanShapes.drawToPage(human, 288, 720);
-
-
-/*
-	auto layRec = make_shared<Rectangle>(30, 40);
+	auto layTri = make_shared<Triangle>(50);
 	auto layCir = make_shared<Circle>(20);
-	auto layPenta = make_shared<Polygon>(5, 30);
+	auto layRec = make_shared<Rectangle>(40, 20);
 
 	Page layeredShapes;
-	Layered layer{ layRec, layCir, layPenta };
+	Layered layer{ layTri, layCir, layRec };
+	Layered layer2{ layRec, layCir };
 	layeredShapes.drawToPage(layer, 144, 144);
-	*/
+	layeredShapes.drawToPage(layer2, 4*72, 4*72);
+
+	cout << layer.getPostScriptCode() << endl;
+	
 	PSOutput output;
-	//TODO: polygon:calcHeight is giving some really huge values
-	//output.addPage(basicShapes);
+	output.addPage(basicShapes);
 	output.addPage(rotatedShapes);
 	output.addPage(scaledShapes);
-	//output.addPage(layeredShapes);
-    output.addPage(verticalShapes);
-//    output.addPage(humanShapes);
+	output.addPage(layeredShapes);
 	cout << "Testing file output" << endl;
 	output.PSOutput_File("testShapes.ps");
 }

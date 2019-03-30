@@ -25,13 +25,16 @@ using std::make_unique;
 using std::shared_ptr;
 using std::make_shared;
 
+const double PI = 4*atan(1); 
+
+
 // Nami
 class Shape
 {
 public:
     virtual double getHeight() const;
     virtual double getWidth() const;
-    virtual std::string getPostScriptCode(int x, int y) const = 0;
+    virtual std::string getPostScriptCode() const = 0;
     virtual ~Shape() = default;
 
 private:
@@ -41,9 +44,7 @@ private:
 protected:
     void setHeight(double height);
     void setWidth(double width);
-
-    //for testing later
-    //string drawShape(const shape &s, int x, int y);
+    std::string drawShape(const Shape &s, int x, int y);
 };
 
 // Basic Shapes
@@ -54,7 +55,7 @@ class Circle : public Shape
 public:
     explicit Circle(double radius);
     double getRadius() const;
-    std::string getPostScriptCode(int x, int y) const override;
+    std::string getPostScriptCode() const override;
 
 private:
     double _radius;
@@ -76,7 +77,7 @@ public:
     double getTriHypot() const;
     double getInnerAngle() const;
 
-    std::string getPostScriptCode(int x, int y) const override;
+    std::string getPostScriptCode() const override;
 
 private:
     int _numOfSides;
@@ -91,7 +92,7 @@ class Rectangle : public Shape
 {
 public:
     Rectangle(double, double);
-    string getPostScriptCode(int x, int y) const override;
+    string getPostScriptCode() const override;
 
 };
 
@@ -100,7 +101,7 @@ class Spacer : public Shape
 {
 public:
     Spacer(double, double);
-    string getPostScriptCode(int x, int y) const override;
+    string getPostScriptCode() const override;
 
 };
 
@@ -109,14 +110,14 @@ public:
 class Square : public Polygon
 {
 public:
-    Square(int sideLength): Polygon(4, sideLength){};
+    Square(double sideLength): Polygon(4.0, sideLength){};
 };
 
 // Alex
 class Triangle : public Polygon
 {
 public:
-    Triangle(int sideLength): Polygon(3, sideLength){};
+    Triangle(double sideLength): Polygon(3.0, sideLength){};
 };
 
 #endif //CPS_SHAPES_H

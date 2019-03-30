@@ -11,10 +11,11 @@ using std::ofstream;
 using std::cout;
 
 
-
 void Page::drawToPage(const Shape &s, int x, int y)
 {
-    _postScriptCode += s.getPostScriptCode(x, y);
+    _postScriptCode += "gsave\n" + to_string(x) + " " +
+                        to_string(y) + " translate\n" + s.getPostScriptCode() +
+                        "\nstroke \ngrestore\n";
 }
 
 string Page::getPostScriptCode()

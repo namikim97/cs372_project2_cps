@@ -8,9 +8,9 @@ using std::to_string;
 
 
 Rotated::Rotated(const Shape &s, double rotation):_rotation(rotation),
-                                                 _postScriptCode(s.getPostScriptCode(0, 0))
+                                                 _postScriptCode(s.getPostScriptCode())
 {
-    const double radians = (_rotation * 2.0 * M_PI)/360.0;
+    const double radians = (_rotation * 2.0 * PI)/360.0;
 
     _origWidth = s.getWidth();
     _origHeight = s.getHeight();
@@ -19,11 +19,11 @@ Rotated::Rotated(const Shape &s, double rotation):_rotation(rotation),
     setHeight(abs(_origWidth * sin(radians) + _origHeight * cos(radians)));
 }
 
-string Rotated::getPostScriptCode(int x, int y) const
+string Rotated::getPostScriptCode() const
 {
     string retPSCode;
 
-    retPSCode = to_string((int)_rotation) + " rotate \n" + _postScriptCode;
+    retPSCode = to_string((int)_rotation) + " rotate\n" + _postScriptCode;
 
     return retPSCode;
 }
@@ -31,13 +31,13 @@ string Rotated::getPostScriptCode(int x, int y) const
 Scaled::Scaled(const Shape &s, double horScale, double verScale)
                 :_horScale(horScale), _verScale(verScale), 
                 _origWidth(s.getWidth()), _origHeight(s.getHeight()),
-                _postScriptCode(s.getPostScriptCode(0, 0))
+                _postScriptCode(s.getPostScriptCode())
 {
     setWidth(_origWidth * horScale);
     setHeight(_origHeight * verScale);
 }
 
-string Scaled::getPostScriptCode(int x, int y) const
+string Scaled::getPostScriptCode() const
 {
     string retPSCode;
 
@@ -67,23 +67,23 @@ Layered::Layered(std::initializer_list<shared_ptr<Shape>> Shapes)
 
     std::string retPSCode;
     double xCenterCoord = getWidth() / 2.0;
-    xCenterCoord += (72*2);
     double yCenterCoord = getHeight() / 2.0;
-    yCenterCoord += (72+2);
+    xCenterCoord += (72*2);
+    yCenterCoord += (72*2);
 
-    for(auto i=0; i<vecShapes.size(); ++i)
-    {
-        xCenterCoord -= (vecShapes[i]->getWidth()) / 2.0;
-        yCenterCoord -= (vecShapes[i]->getHeight()) / 2.0;
-        //retPSCode += drawToPage(*vecShapes[i], 0, 0);
+    for(int i=0; i<vecShapes.size(); ++i)
+    {   
+        yCenterCoord -= vecShapes[i]->getHeight() / 2.0;
+        xCenterCoord -= vecShapes[i]->getWidth() / 2.0;
+        retPSCode += drawShape(*vecShapes[i], 0, 0);
     }
 
     _postScriptCode = retPSCode;
 }
 
-std::string Layered::getPostScriptCode(int x, int y) const
+string Layered::getPostScriptCode() const
 {
-    return _postScriptCode;;
+    return _postScriptCode;
 }
 
 
