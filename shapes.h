@@ -5,23 +5,23 @@
 #define CPS_SHAPES_H
 
 #include <string>
-//using std::string;
-//using std::to_string;
-//#include <math.h>
+using std::string;
+using std::to_string;
+#include <math.h>
 #include <vector>
-//using std::vector;
+using std::vector;
 #include <cmath>
-//using std::sin;
-//using std::cos;
-//using std::abs;
+using std::sin;
+using std::cos;
+using std::abs;
 #include<iostream>
-//using std::cout;
-//using std::endl;
+using std::cout;
+using std::endl;
 #include<fstream>
-//using std::ofstream;
+using std::ofstream;
 #include<memory>
-//using std::shared_ptr;
-//using std::make_shared;
+using std::shared_ptr;
+using std::make_shared;
 
 // Nami
 class Shape
@@ -87,14 +87,19 @@ private:
 // Simeon
 class Rectangle : public Shape
 {
+public:
+    Rectangle(double, double);
+    string getPostScriptCode() const override;
 
-    // TO DO
 };
 
 // Simeon
 class Spacer : public Shape
 {
-    // TO DO
+public:
+    Spacer(double, double);
+    string getPostScriptCode() const override;
+
 };
 
 

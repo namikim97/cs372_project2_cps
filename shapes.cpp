@@ -155,3 +155,48 @@ string Polygon::getPostScriptCode() const
 
     return retPSCode;
 }
+
+Rectangle::Rectangle(double width, double height) {
+    setWidth(width);
+    setHeight(height);
+}
+
+string Rectangle::getPostScriptCode() const {
+    string originX = "72", originY = "72";  // TODO: Change this later?
+    string strWidth = to_string(getWidth());
+    string strHeight = to_string(getHeight());
+    string originXWidthAdd = originX + " " + strWidth + " add ";
+    string originYHeightAdd = originY + " " + strHeight + " add ";
+
+    string PostScriptCode = "newpath\n" +
+                            originX + " " + originY + " moveto\n" +
+                            originXWidthAdd + originY + " lineto\n" +
+                            originXWidthAdd + originYHeightAdd + " lineto\n" +
+                            originX + " " + originYHeightAdd + " lineto\n" +
+                            "closepath\n" +
+                            "stroke\n";
+
+    return PostScriptCode;
+}
+
+Spacer::Spacer(double width, double height) {
+    setWidth(width);
+    setHeight(height);
+}
+
+string Spacer::getPostScriptCode() const {
+    string originX = "72", originY = "72";
+    string strWidth = to_string(getWidth());
+    string strHeight = to_string(getHeight());
+    string originXWidthAdd = originX + " " + strWidth + " add ";
+    string originYHeightAdd = originY + " " + strHeight + " add ";
+
+    string PostScriptCode = "newpath\n" +
+                            originX + " " + originY + " moveto\n" +
+                            originXWidthAdd + originY + " lineto\n" +
+                            originXWidthAdd + originYHeightAdd + " lineto\n" +
+                            originX + " " + originYHeightAdd + " lineto\n" +
+                            "closepath\n";
+
+    return PostScriptCode;
+}
