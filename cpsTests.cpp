@@ -21,7 +21,9 @@ TEST_CASE( "Shape: Rectangle ") {
 
     SECTION( "Rectangle: Generates correct PostScript code" ) {
         // TODO: Figure out which (x,y) drawing will start at. Default (72, 72)?
-        string originX = "72", originY = "72";
+        double halfWidth = width/2, halfHeight = height/2;
+        string originX = "x " + to_string(halfWidth) + " sub";
+        string originY = "y " + to_string(halfHeight) + " sub";
         string strWidth = to_string(width), strHeight = to_string(height);
         string originXWidthAdd = originX + " " + strWidth + " add ";
         string originYHeightAdd = originY + " " + strHeight + " add ";
