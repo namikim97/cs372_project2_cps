@@ -20,6 +20,8 @@ using std::cin;
 using std::endl;
 #include <fstream>
 using std::ofstream;
+#include <memory>
+using std::make_shared;
 
 
 void testShapes(void)
@@ -57,11 +59,20 @@ void testShapes(void)
 	scaledShapes.drawToPage(scaCirc, 55, 55);
 	scaledShapes.drawToPage(scaPenta, 120, 120);
 	scaledShapes.drawToPage(scaRec, 220, 220);
+
+	auto layRec = make_shared<Rectangle>(30, 40);
+	auto layCir = make_shared<Circle>(20);
+	auto layPenta = make_shared<Polygon>(5, 30);
+
+	Page layeredShapes;
+	Layered layer{ layRec, layCir, layPenta };
+	layeredShapes.drawToPage(layer, 144, 144);
 	
 	PSOutput output;
 	output.addPage(basicShapes);
 	output.addPage(rotatedShapes);
 	output.addPage(scaledShapes);
+	output.addPage(layeredShapes);
 	cout << "Testing file output" << endl;
 	output.PSOutput_File("testShapes.ps");
 }

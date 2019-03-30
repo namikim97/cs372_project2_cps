@@ -114,4 +114,3 @@ TEST_CASE( "Compound Shape: Vertical") {
     }
 
 }
-
