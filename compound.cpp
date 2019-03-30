@@ -87,4 +87,36 @@ std::string Layered::getPostScriptCode() const
 }
 
 
+double Horizontal::getWidth() const {
+    double total = 0.0;
+    for(auto const & shape : _shapes) {
+        total += shape->getWidth();
+    }
+    return total;
+}
 
+double Horizontal::getHeight() const {
+    double max = 0.0;
+    for(auto const & shape : _shapes) {
+        if (shape->getHeight() >= max)
+            max = shape->getHeight();
+    }
+    return max;
+}
+
+double Vertical::getWidth() const {
+    double max = 0.0;
+    for(auto const & shape : _shapes) {
+        if (shape->getWidth() >= max)
+            max = shape->getWidth();
+    }
+    return max;
+}
+
+double Vertical::getHeight() const {
+    double total = 0.0;
+    for(auto const & shape : _shapes) {
+        total += shape->getHeight();
+    }
+    return total;
+}
