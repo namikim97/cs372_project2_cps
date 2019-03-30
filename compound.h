@@ -56,11 +56,16 @@ private:
 class Vertical : public Shape
 {
 public:
-    template <typename T>
-    Vertical( std::initializer_list<shared_ptr<T>> list) : _shapes(std::move(list)){};
+    Vertical( std::initializer_list<shared_ptr<Shape>> list) : _shapes(std::move(list)){};
+
 
     string getPostScriptCode() const override {
-        return "dummy";
+        string retPsCode;
+        for (auto shape : _shapes){
+            retPsCode = retPsCode + shape->getPostScriptCode();
+            retPsCode = retPsCode + shape->getPostScriptCode();
+        }
+        return retPsCode;
     }
 
 

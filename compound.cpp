@@ -49,7 +49,7 @@ string Scaled::getPostScriptCode() const
 
 Layered::Layered(std::initializer_list<shared_ptr<Shape>> Shapes)
 {
-    for(auto i : Shapes)
+    for(const auto &i : Shapes)
     {
         if(getWidth() < i->getWidth())
         {
@@ -120,3 +120,5 @@ double Vertical::getHeight() const {
     }
     return total;
 }
+
+

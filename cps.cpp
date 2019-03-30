@@ -24,19 +24,22 @@ using std::ofstream;
 using std::make_shared;
 #include <initializer_list>
 
-
 void testShapes(void)
 {
 	Circle circle1(20);
 	Polygon pentagon1(5, 30);
 	Polygon hexagon1(6, 20);
 	Rectangle rect(144, 72);
+	//Triangle tri(20);
+	//Square sq(20);
 
 	Page basicShapes;
 	basicShapes.drawToPage(circle1, 40, 40);
 	basicShapes.drawToPage(pentagon1, 144, 144);
 	basicShapes.drawToPage(hexagon1, 100, 100);
 	basicShapes.drawToPage(rect, 200, 200);
+	//basicShapes.drawToPage(tri, 200, 200);
+	//basicShapes.drawToPage(sq, 300, 300);
 
 	Rotated rotPent(pentagon1, 20);
 	Rotated rotHex(hexagon1, 15);
@@ -56,10 +59,15 @@ void testShapes(void)
 	scaledShapes.drawToPage(scaPenta, 120, 120);
 	scaledShapes.drawToPage(scaRec, 220, 220);
 
-	auto a = make_shared<Rectangle>(30, 30);
-	auto b = make_shared<Rotated>(pentagon1, 60);
-	auto c = make_shared<Circle>(20);
-	auto d = make_shared<Polygon>(5, 20);
+    auto a = make_shared<Rectangle>(30, 30);
+    auto b = make_shared<Rotated>(pentagon1, 60);
+    auto c = make_shared<Circle>(20);
+    auto d = make_shared<Polygon>(5, 20);
+
+	auto vTri = make_shared<Triangle>(50);
+	auto vCir = make_shared<Circle>(20);
+	auto vRec = make_shared<Rectangle>(40, 20);
+
 
 	auto layTri = make_shared<Triangle>(50);
 	auto layCir = make_shared<Circle>(20);
@@ -70,14 +78,20 @@ void testShapes(void)
 	Layered layer2{ layRec, layCir };
 	layeredShapes.drawToPage(layer, 144, 144);
 	layeredShapes.drawToPage(layer2, 4*72, 4*72);
-
 	cout << layer.getPostScriptCode() << endl;
-	
+
+
+	Page verticalShapes;
+	Vertical vert{ vTri, vCir, vRec };
+	verticalShapes.drawToPage(vert, 50, 50);
+	cout << vert.getPostScriptCode() << endl;
+
 	PSOutput output;
 	output.addPage(basicShapes);
 	output.addPage(rotatedShapes);
 	output.addPage(scaledShapes);
 	output.addPage(layeredShapes);
+	output.addPage(verticalShapes);
 	cout << "Testing file output" << endl;
 	output.PSOutput_File("testShapes.ps");
 }
