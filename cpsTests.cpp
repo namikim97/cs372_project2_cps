@@ -93,7 +93,7 @@ TEST_CASE( "Can make a triangle", "[Triangle]" ) {
 TEST_CASE( "Compound Shape: Vertical") {
     // TODO: Ideally test all shapes by the end.
     shared_ptr<Shape> tRec(new class Rectangle(72,36));
-    shared_ptr<Shape> spc(new class Rectangle(18,36));
+    shared_ptr<Shape> spc(new class Spacer(18,36));
     shared_ptr<Shape> bRec(new class Rectangle(36,72));
     auto list = {tRec, spc, bRec};
     Vertical vert(list);
