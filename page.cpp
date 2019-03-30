@@ -14,12 +14,12 @@ using std::cout;
 
 void Page::drawToPage(const Shape &s, int x, int y)
 {
-    _postScriptCode += "gsave \n";
+    _postScriptCode += "gsave\n";
     _postScriptCode += "/x " + to_string(x) + " " + "def\n";
     _postScriptCode += "/y " + to_string(y) + " " + "def\n";
     _postScriptCode += "x y translate\n";
     _postScriptCode += s.getPostScriptCode();
-    _postScriptCode += "\n grestore \n";
+    _postScriptCode += "grestore\n";
 }
 
 string Page::getPostScriptCode()
@@ -40,7 +40,7 @@ void PSOutput::PSOutput_File(string filename)
     int pageNumber = 1;
     for(auto i : pages)
     {
-        of << "%%Page: " << pageNumber << " " << pageNumber << "\n";
+        of << "%%Page: " << pageNumber << " " << pageNumber << "\n\n";
         of << i.getPostScriptCode();
         of << " \n showpage \n";
         ++pageNumber;

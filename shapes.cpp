@@ -39,11 +39,9 @@ double Circle::getRadius() const
 string Circle::getPostScriptCode() const
 {
     string radius = to_string(getRadius());
-    string retPSCode = R"(
-    newpath
-    0 0 )" + radius + R"( 0 360 arc
-    stroke
-    )";
+    string retPSCode = "newpath\n"
+                       "0 0 " + radius + "0 360 arc\n"
+                       "stroke";
 
     return retPSCode;
 }
