@@ -104,18 +104,18 @@ double Polygon::calcWidth()
 
     else if(sides % 4 == 0)
     {
-        return getTriHeight() * 2;
+        return getTriHeight() * 2.0;
     }
 
     else if(sides % 2 == 0)
     {
-        return getTriHypot() * 2;
+        return getTriHypot() * 2.0;
     }
 
     else // number of sides is odd and it's not a triangle
     {
-        double bigTriAngle = (360.0/sides) * ((sides - 1.0)/2);
-        return 2 * getTriHypot() * sin((bigTriAngle/2) * (M_PI/180));
+        double bigTriAngle = (360.0/sides) * ((sides - 1.0)/2.0);
+        return 2.0 * getTriHypot() * sin((bigTriAngle/2.0) * (M_PI/180));
     }
 }
 
@@ -156,8 +156,8 @@ string Polygon::getPostScriptCode() const
     string SideMinusOne = to_string(sideminusone);
     double roationangle = 180 - getInnerAngle();
     string RotationAngle = to_string(roationangle);
-    string draw_X = to_string(getSideLength()/2);
-    string draw_Y = to_string(getHeight()/2);
+    string draw_X = to_string(-getSideLength()/2);
+    string draw_Y = to_string(-getHeight()/2);
     string SideLength = to_string(getSideLength());
 
     string retPSCode = 
@@ -192,8 +192,8 @@ string Rectangle::getPostScriptCode() const {
     //                         originX + " " + originYHeightAdd + " lineto\n" +
     //                         "closepath\n";
 
-    double halfWidth = getWidth()/2.0;
-    double halfHeight = getHeight()/2.0;
+    double halfWidth = -getWidth()/2.0;
+    double halfHeight = -getHeight()/2.0;
     string HalfWidth = to_string(halfWidth);
     string HalfHeight = to_string(halfHeight);
     string Width = to_string(getWidth());
