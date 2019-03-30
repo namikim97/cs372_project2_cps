@@ -8,6 +8,9 @@
 #include "compound.h"
 #include <cmath>
 using std::sqrt;
+#include <memory>
+using std::unique_ptr;
+using std::make_unique;
 
 TEST_CASE( "Shape: Rectangle ") {
     double width = 72;
@@ -82,6 +85,21 @@ TEST_CASE( "Can make a triangle", "[Triangle]" ) {
     REQUIRE( (tri.getSideLength()) == 4 );
     REQUIRE( (tri.calcTriHypot()) == 2 / (sin(M_PI/3)));
     //REQUIRE( (tri.calcTriHeight()) ==  tri.calcTriHypot() * cos(M_PI)/3); //this assertion failing
+
+}
+
+TEST_CASE( "Compound Shape: Vertical") {
+    // TODO: Ideally test all shapes by the end.
+    auto topRect = make_shared<class Rectangle>(72,36);
+    auto spacer = make_shared<class spacer>(18, 36);
+    auto botRect = make_shared<class Rectangle>(36, 72);
+
+    // TODO: Resolve template type error
+    Vertical vert({topRect, spacer, botRect});
+    SECTION( "Vertical: ctor-> {Rectangle, Spacer, Rectangle}" ) {
+        REQUIRE( vert.getWidth() == 72 );
+        REQUIRE( vert.getHeight() == 144 );
+    }
 
 }
 

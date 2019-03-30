@@ -6,6 +6,8 @@
 
 #include "shapes.h"
 #include <string>
+#include <initializer_list>
+using std::initializer_list;
 
 // Compound Shapes
 
@@ -32,9 +34,37 @@ class Layered : public Shape
     // TO DO
 };
 
+// Simeon
+template <class T>
 class Vertical : public Shape
 {
-    // TO DO
+public:
+    Vertical(initializer_list<T> list) : _shapes(list) {}
+
+    string getPostScriptCode() const override {
+        return "dummy";
+    }
+
+    double getWidth() const override {
+        double max = 0.0;
+        for(auto const & shape : _shapes) {
+            if (shape->getWidth() >= max)
+                max = shape->getWidth();
+        }
+        return max;
+    }
+
+    double getHeight() const override {
+        double total = 0.0;
+        for(auto const & shape : _shapes) {
+            total += shape->getHeight();
+        }
+        return total;
+    }
+
+private:
+    vector<T> _shapes;
+
 };
 
 class Horizontal : public Shape

@@ -30,10 +30,14 @@ void testShapes(void)
 	//Triangle tri(3, 20);
 	//Square sq(20, 20);
 
+	Rectangle rect(144, 72);
+
 	Page basicShapes;
 
+	basicShapes.drawToPage(rect, 200, 200);
 	basicShapes.drawToPage(circle1, 40, 40);
-	basicShapes.drawToPage(pentagon1, 144, 144);
+
+	//basicShapes.drawToPage(pentagon1, 144, 144);
 	// basicShapes.drawToPage(recta, 100, 100);
 	// basicShapes.drawToPage(tri, 200, 200);
 	// basicShapes.drawToPage(sq, 300, 300);
