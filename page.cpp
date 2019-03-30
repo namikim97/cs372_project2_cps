@@ -19,7 +19,7 @@ void Page::drawToPage(const Shape &s, int x, int y)
     _postScriptCode += "/y " + to_string(y) + " " + "def\n";
     _postScriptCode += "x y translate\n";
     _postScriptCode += s.getPostScriptCode();
-    _postScriptCode += "grestore\n";
+    _postScriptCode += "grestore\n\n";
 }
 
 string Page::getPostScriptCode()
@@ -42,7 +42,7 @@ void PSOutput::PSOutput_File(string filename)
     {
         of << "%%Page: " << pageNumber << " " << pageNumber << "\n\n";
         of << i.getPostScriptCode();
-        of << " \n showpage \n";
+        of << "\nshowpage\n";
         ++pageNumber;
     }
 
