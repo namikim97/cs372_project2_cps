@@ -10,6 +10,7 @@
 #include "page.h"
 #include "shapes.h"
 #include "compound.h"
+#include "human.h"
 
 #include <string>
 using std::string;
@@ -68,6 +69,10 @@ void testShapes(void)
     Page verticalShapes;
     verticalShapes.drawToPage(vert, 50, 50);
 
+//    Human human(360, 1);
+//    Page humanShapes;
+//    humanShapes.drawToPage(human, 288, 720);
+
 
 /*
 	auto layRec = make_shared<Rectangle>(30, 40);
@@ -85,6 +90,7 @@ void testShapes(void)
 	output.addPage(scaledShapes);
 	//output.addPage(layeredShapes);
     output.addPage(verticalShapes);
+//    output.addPage(humanShapes);
 	cout << "Testing file output" << endl;
 	output.PSOutput_File("testShapes.ps");
 }

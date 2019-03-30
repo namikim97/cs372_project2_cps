@@ -20,4 +20,5 @@ add_executable(cpsMain
         cps.cpp
         shapes.cpp shapes.h
         compound.cpp compound.h
-        page.cpp page.h)
+        page.cpp page.h
+        human.cpp human.h)
