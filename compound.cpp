@@ -28,3 +28,5 @@ string Rotated::getPostScriptCode() const
 
     return retPSCode;
 }
+
+

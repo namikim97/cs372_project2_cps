@@ -1,3 +1,5 @@
+#include <utility>
+
 // compound.h
 // Header file for Compound Shape classes.
 
@@ -7,7 +9,7 @@
 #include "shapes.h"
 #include <string>
 #include <initializer_list>
-using std::initializer_list;
+#include <memory> //for std::unique_ptr
 
 // Compound Shapes
 
@@ -35,11 +37,12 @@ class Layered : public Shape
 };
 
 // Simeon
-template <class T>
+
 class Vertical : public Shape
 {
 public:
-    Vertical(initializer_list<T> list) : _shapes(list) {}
+    template <typename T>
+    Vertical( std::initializer_list<shared_ptr<T>> list) : _shapes(std::move(list)){};
 
     string getPostScriptCode() const override {
         return "dummy";
@@ -63,7 +66,7 @@ public:
     }
 
 private:
-    vector<T> _shapes;
+    vector<std::shared_ptr<Shape>> _shapes;
 
 };
 

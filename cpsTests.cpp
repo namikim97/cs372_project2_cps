@@ -11,6 +11,8 @@ using std::sqrt;
 #include <memory>
 using std::unique_ptr;
 using std::make_unique;
+using std::make_shared;
+using std::shared_ptr;
 
 TEST_CASE( "Shape: Rectangle ") {
     double width = 72;
@@ -90,12 +92,11 @@ TEST_CASE( "Can make a triangle", "[Triangle]" ) {
 
 TEST_CASE( "Compound Shape: Vertical") {
     // TODO: Ideally test all shapes by the end.
-    auto topRect = make_shared<class Rectangle>(72,36);
-    auto spacer = make_shared<class spacer>(18, 36);
-    auto botRect = make_shared<class Rectangle>(36, 72);
-
-    // TODO: Resolve template type error
-    Vertical vert({topRect, spacer, botRect});
+    shared_ptr<Shape> tRec(new class Rectangle(72,36));
+    shared_ptr<Shape> spc(new class Rectangle(18,36));
+    shared_ptr<Shape> bRec(new class Rectangle(36,72));
+    auto list = {tRec, spc, bRec};
+    Vertical vert(list);
     SECTION( "Vertical: ctor-> {Rectangle, Spacer, Rectangle}" ) {
         REQUIRE( vert.getWidth() == 72 );
         REQUIRE( vert.getHeight() == 144 );
