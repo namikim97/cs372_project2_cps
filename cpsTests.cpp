@@ -6,6 +6,7 @@
 #include "page.h"
 #include "shapes.h"
 #include "compound.h"
+#include "human.h"
 #include <cmath>
 using std::sqrt;
 #include <memory>
@@ -127,4 +128,15 @@ TEST_CASE( "Compound Shape: Horizontal") {
         REQUIRE( horizontal.getHeight() == 72 );
     }
 
+}
+
+TEST_CASE( "Special Shape: Human" ) {
+    double height = 360;
+    double obesity = 1;
+
+    Human human(height, obesity);
+    SECTION( "Human: ctor-> {Height = 360, Obesity = 1}") {
+        REQUIRE( human.getHeight() == height );
+        REQUIRE( human.getObesity() == obesity );
+    }
 }

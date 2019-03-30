@@ -12,7 +12,8 @@ add_executable(cpsTests
         cpsTests.cpp
         shapes.cpp shapes.h
         compound.cpp compound.h
-        page.cpp page.h)
+        page.cpp page.h
+        human.cpp human.h)
 
 # main
 add_executable(cpsMain
