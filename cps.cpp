@@ -26,7 +26,6 @@ void testShapes(void)
 {
 	Circle circle1(20);
 	Polygon pentagon1(5, 30);
-	//Rectangle recta(20, 30);
 	//Triangle tri(3, 20);
 	//Square sq(20, 20);
 
@@ -37,8 +36,7 @@ void testShapes(void)
 	basicShapes.drawToPage(rect, 200, 200);
 	basicShapes.drawToPage(circle1, 40, 40);
 
-	//basicShapes.drawToPage(pentagon1, 144, 144);
-	// basicShapes.drawToPage(recta, 100, 100);
+	basicShapes.drawToPage(pentagon1, 144, 144);
 	// basicShapes.drawToPage(tri, 200, 200);
 	// basicShapes.drawToPage(sq, 300, 300);
 
