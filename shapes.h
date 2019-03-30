@@ -31,7 +31,7 @@ class Shape
 public:
     virtual double getHeight() const;
     virtual double getWidth() const;
-    virtual std::string getPostScriptCode() const = 0;
+    virtual std::string getPostScriptCode(int x, int y) const = 0;
     virtual ~Shape() = default;
 
 private:
@@ -54,7 +54,7 @@ class Circle : public Shape
 public:
     explicit Circle(double radius);
     double getRadius() const;
-    std::string getPostScriptCode() const override;
+    std::string getPostScriptCode(int x, int y) const override;
 
 private:
     double _radius;
@@ -76,7 +76,7 @@ public:
     double getTriHypot() const;
     double getInnerAngle() const;
 
-    std::string getPostScriptCode() const override;
+    std::string getPostScriptCode(int x, int y) const override;
 
 private:
     int _numOfSides;
@@ -91,7 +91,7 @@ class Rectangle : public Shape
 {
 public:
     Rectangle(double, double);
-    string getPostScriptCode() const override;
+    string getPostScriptCode(int x, int y) const override;
 
 };
 
@@ -100,7 +100,7 @@ class Spacer : public Shape
 {
 public:
     Spacer(double, double);
-    string getPostScriptCode() const override;
+    string getPostScriptCode(int x, int y) const override;
 
 };
 

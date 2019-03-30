@@ -36,12 +36,18 @@ double Circle::getRadius() const
     return _radius;
 }
 
-string Circle::getPostScriptCode() const
+string Circle::getPostScriptCode(int x, int y) const
 {
     string radius = to_string(getRadius());
-    string retPSCode = "newpath\n"
+    string retPSCode = "%%Circle\n"
+                       "gsave\n"
+                       "/x " + to_string(x) + " " + "def\n" +
+                       "/y " + to_string(y) + " " + "def\n"
+                       "x y translate\n"
+                       "newpath\n"
                        "0 0 " + radius + " 0 360 arc\n"
-                       "stroke\n";
+                       "stroke\n"
+                       "grestore\n\n";
 
     return retPSCode;
 }
@@ -138,7 +144,7 @@ double Polygon::getInnerAngle() const
     return _innerAngle;
 }
 
-string Polygon::getPostScriptCode() const
+string Polygon::getPostScriptCode(int x, int y) const
 {
     double sideminusone = getNumOfSides() - 1;
     string SideMinusOne = to_string(sideminusone);
@@ -148,15 +154,20 @@ string Polygon::getPostScriptCode() const
     string draw_Y = to_string(getHeight()/2);
     string SideLength = to_string(getSideLength());
 
-    string retPSCode = 
-        "newpath\n" + 
+    string retPSCode = "%%Polygon\n"
+        "gsave\n"
+        "/x " + to_string(x) + " " + "def\n" +
+        "/y " + to_string(y) + " " + "def\n"
+        "x y translate\n"
+        "newpath\n" +
         draw_X + " " + draw_Y + " moveto\n" +
         "1 1 " + SideMinusOne + " {\n" +
         SideLength + " 0 rlineto\n" + 
         RotationAngle + " rotate\n" +
         "} for\n" + 
         "closepath\n" +
-        "stroke\n";
+        "stroke\n" +
+        "grestore\n\n";
 
     return retPSCode;
 }
@@ -166,7 +177,7 @@ Rectangle::Rectangle(double width, double height) {
     setHeight(height);
 }
 
-string Rectangle::getPostScriptCode() const {
+string Rectangle::getPostScriptCode(int x, int y) const {
     double halfWidth = getWidth()/2, halfHeight = getHeight()/2;
     string originX = "x " + to_string(halfWidth) + " sub";
     string originY = "y " + to_string(halfHeight) + " sub";
@@ -174,13 +185,19 @@ string Rectangle::getPostScriptCode() const {
     string originXWidthAdd = originX + " " + strWidth + " add ";
     string originYHeightAdd = originY + " " + strHeight + " add ";
 
-    string PostScriptCode = "newpath\n" +
+    string PostScriptCode = "%%Rectangle\n"
+                            "gsave\n"
+                            "/x " + to_string(x) + " " + "def\n" +
+                            "/y " + to_string(y) + " " + "def\n"
+                            "x y translate\n"
+                            "newpath\n" +
                             originX + " " + originY + " moveto\n" +
                             originXWidthAdd + originY + " lineto\n" +
                             originXWidthAdd + originYHeightAdd + " lineto\n" +
                             originX + " " + originYHeightAdd + " lineto\n" +
                             "closepath\n" +
-                            "stroke\n";
+                            "stroke\n" +
+                            "grestore\n\n";
 
     return PostScriptCode;
 }
@@ -190,7 +207,7 @@ Spacer::Spacer(double width, double height) {
     setHeight(height);
 }
 
-string Spacer::getPostScriptCode() const {
+string Spacer::getPostScriptCode(int x, int y) const {
     double halfWidth = getWidth()/2, halfHeight = getHeight()/2;
     string originX = "x " + to_string(halfWidth) + " sub";
     string originY = "y " + to_string(halfHeight) + " sub";
@@ -198,12 +215,18 @@ string Spacer::getPostScriptCode() const {
     string originXWidthAdd = originX + " " + strWidth + " add ";
     string originYHeightAdd = originY + " " + strHeight + " add ";
 
-    string PostScriptCode = "newpath\n" +
+    string PostScriptCode = "%%Spacer\n"
+                            "gsave\n"
+                            "/x " + to_string(x) + " " + "def\n" +
+                            "/y " + to_string(y) + " " + "def\n"
+                            "x y translate\n"
+                            "newpath\n" +
                             originX + " " + originY + " moveto\n" +
                             originXWidthAdd + originY + " lineto\n" +
                             originXWidthAdd + originYHeightAdd + " lineto\n" +
                             originX + " " + originYHeightAdd + " lineto\n" +
-                            "closepath\n";
+                            "closepath\n" +
+                            "grestore\n\n";
 
     return PostScriptCode;
 }

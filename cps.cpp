@@ -30,7 +30,6 @@ void testShapes(void)
 	Polygon pentagon1(5, 30);
 	Polygon hexagon1(6, 20);
 	Rectangle rect(144, 72);
-	// Hey Alex you can uncomment the last two shapes when you're done writing them!
 	Triangle tri(20);
 	Square sq(20);
 
@@ -60,6 +59,17 @@ void testShapes(void)
 	scaledShapes.drawToPage(scaPenta, 120, 120);
 	scaledShapes.drawToPage(scaRec, 220, 220);
 
+    shared_ptr<Shape> tRec(new class Rectangle(72,36));
+    shared_ptr<Shape> spc(new class Spacer(18,36));
+    shared_ptr<Shape> bRec(new class Rectangle(36,72));
+    auto list = {tRec, spc, bRec};
+    Vertical vert(list);
+
+    Page verticalShapes;
+    verticalShapes.drawToPage(vert, 50, 50);
+
+
+/*
 	auto layRec = make_shared<Rectangle>(30, 40);
 	auto layCir = make_shared<Circle>(20);
 	auto layPenta = make_shared<Polygon>(5, 30);
@@ -67,12 +77,14 @@ void testShapes(void)
 	Page layeredShapes;
 	Layered layer{ layRec, layCir, layPenta };
 	layeredShapes.drawToPage(layer, 144, 144);
-	
+	*/
 	PSOutput output;
-	output.addPage(basicShapes);
+	//TODO: polygon:calcHeight is giving some really huge values
+	//output.addPage(basicShapes);
 	output.addPage(rotatedShapes);
 	output.addPage(scaledShapes);
-	output.addPage(layeredShapes);
+	//output.addPage(layeredShapes);
+    output.addPage(verticalShapes);
 	cout << "Testing file output" << endl;
 	output.PSOutput_File("testShapes.ps");
 }

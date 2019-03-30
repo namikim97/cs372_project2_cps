@@ -18,7 +18,7 @@ class Rotated : public Shape
 {
 public:
     Rotated(const Shape &s, double rotation);
-    std::string getPostScriptCode() const override;
+    std::string getPostScriptCode(int x, int y) const override;
 
 private:
     double _origWidth;
@@ -31,7 +31,7 @@ class Scaled : public Shape
 {
 public:
     Scaled(const Shape &s, double horScale, double verScale);
-    std::string getPostScriptCode() const override;
+    std::string getPostScriptCode(int x, int y) const override;
 
 private:
     double _origWidth;
@@ -45,7 +45,7 @@ class Layered : public Shape
 {
 public:
     Layered(std::initializer_list<shared_ptr<Shape>> Shapes);
-    std::string getPostScriptCode() const override;
+    std::string getPostScriptCode(int x, int y) const override;
 
 private:
     std::string _postScriptCode;
@@ -59,10 +59,10 @@ public:
     template <typename T>
     Vertical( std::initializer_list<shared_ptr<T>> list) : _shapes(std::move(list)){};
 
-    string getPostScriptCode() const override {
+    string getPostScriptCode(int x, int y) const override {
         string retPsCode;
         for (auto shape : _shapes){
-            retPsCode = retPsCode + shape->getPostScriptCode();
+            retPsCode = retPsCode + shape->getPostScriptCode(x, y);
         }
         return retPsCode;
     }
@@ -83,10 +83,10 @@ public:
     template <typename T>
     Horizontal( std::initializer_list<shared_ptr<T>> list) : _shapes(std::move(list)){};
 
-    string getPostScriptCode() const override {
+    string getPostScriptCode(int x, int y) const override {
         string retPsCode;
         for (auto shape : _shapes){
-            retPsCode = retPsCode + shape->getPostScriptCode();
+            retPsCode = retPsCode + shape->getPostScriptCode(x, y);
         }
         return retPsCode;
     }
