@@ -102,7 +102,7 @@ double Polygon::calcWidth()
 
     else // number of sides is odd and it's not a triangle
     {
-        double bigTriAngle = (360/sides) * ((sides - 1)/2);
+        double bigTriAngle = (360.0/sides) * ((sides - 1.0)/2);
         return 2 * getTriHypot() * sin((bigTriAngle/2) * (M_PI/180));
     }
 }
@@ -110,7 +110,7 @@ double Polygon::calcWidth()
 double Polygon::calcInnerAngle()
 {
     int sides = getNumOfSides();
-    return ((sides - 2) * 180) / sides;
+    return ((sides - 2.0) * 180) / sides;
 }
 
 int Polygon::getNumOfSides() const

@@ -69,10 +69,21 @@ TEST_CASE( "Shape: Spacer ") {
     }
 }
 
-TEST_CASE( "Can make a polygons", "[Polygon]" ) {
+TEST_CASE( "Can make a circle", "[Circle]" ) {
+    class Circle cir(20);
+    REQUIRE( (cir.getRadius()) == 20);
+}
+
+TEST_CASE( "Can make a polygon", "[Pentagon]" ) {
     class Polygon poly(5, 6);
     REQUIRE( (poly.getNumOfSides()) == 5 );
     REQUIRE( (poly.getSideLength()) == 6 );
+}
+
+TEST_CASE( "Can make a polygon", "[Hexagon]" ) {
+    class Polygon poly(6, 10);
+    REQUIRE( (poly.getNumOfSides()) == 6 );
+    REQUIRE( (poly.getSideLength()) == 10 );
 }
 
 TEST_CASE( "Can make a square", "[Square]" ) {
