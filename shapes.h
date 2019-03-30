@@ -50,7 +50,7 @@ protected:
 class Circle : public Shape
 {
 public:
-    Circle(double radius);
+    explicit Circle(double radius);
     double getRadius() const;
     std::string getPostScriptCode() const override;
 
