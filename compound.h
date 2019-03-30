@@ -48,6 +48,7 @@ public:
         return "dummy";
     }
 
+
     double getWidth() const override {
         double max = 0.0;
         for(auto const & shape : _shapes) {
