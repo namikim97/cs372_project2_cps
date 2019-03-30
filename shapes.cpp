@@ -25,8 +25,21 @@ void Shape::setWidth(double width)
     _width = width;
 }
 
-Circle::Circle(double radius):_radius(radius)
+string Shape::drawShape(const Shape &s, int x, int y)
 {
+    string retPSCode;
+
+    retPSCode = "gsave\n" + to_string(x) + " " + to_string(y) +
+                " translate\n" + s.getPostScriptCode() + 
+                "\nstroke\ngrestore\n";
+
+    return retPSCode;
+}
+
+
+Circle::Circle(double radius)
+{
+    _radius = radius;
     setHeight(radius * 2);
     setWidth(radius * 2);
 }
@@ -40,8 +53,7 @@ string Circle::getPostScriptCode() const
 {
     string radius = to_string(getRadius());
     string retPSCode = "newpath\n"
-                       "0 0 " + radius + " 0 360 arc\n"
-                       "stroke\n";
+                       "0 0 " + radius + " 0 360 arc\n";
 
     return retPSCode;
 }
@@ -155,8 +167,7 @@ string Polygon::getPostScriptCode() const
         SideLength + " 0 rlineto\n" + 
         RotationAngle + " rotate\n" +
         "} for\n" + 
-        "closepath\n" +
-        "stroke\n";
+        "closepath\n";
 
     return retPSCode;
 }
@@ -167,22 +178,35 @@ Rectangle::Rectangle(double width, double height) {
 }
 
 string Rectangle::getPostScriptCode() const {
-    double halfWidth = getWidth()/2, halfHeight = getHeight()/2;
-    string originX = "x " + to_string(halfWidth) + " sub";
-    string originY = "y " + to_string(halfHeight) + " sub";
-    string strWidth = to_string(getWidth()), strHeight = to_string(getHeight());
-    string originXWidthAdd = originX + " " + strWidth + " add ";
-    string originYHeightAdd = originY + " " + strHeight + " add ";
+    // double halfWidth = getWidth()/2, halfHeight = getHeight()/2;
+    // string originX = "x " + to_string(halfWidth) + " sub";
+    // string originY = "y " + to_string(halfHeight) + " sub";
+    // string strWidth = to_string(getWidth()), strHeight = to_string(getHeight());
+    // string originXWidthAdd = originX + " " + strWidth + " add ";
+    // string originYHeightAdd = originY + " " + strHeight + " add ";
 
-    string PostScriptCode = "newpath\n" +
-                            originX + " " + originY + " moveto\n" +
-                            originXWidthAdd + originY + " lineto\n" +
-                            originXWidthAdd + originYHeightAdd + " lineto\n" +
-                            originX + " " + originYHeightAdd + " lineto\n" +
-                            "closepath\n" +
-                            "stroke\n";
+    // string PostScriptCode = "newpath\n" +
+    //                         originX + " " + originY + " moveto\n" +
+    //                         originXWidthAdd + originY + " lineto\n" +
+    //                         originXWidthAdd + originYHeightAdd + " lineto\n" +
+    //                         originX + " " + originYHeightAdd + " lineto\n" +
+    //                         "closepath\n";
 
-    return PostScriptCode;
+    double halfWidth = getWidth()/2.0;
+    double halfHeight = getHeight()/2.0;
+    string HalfWidth = to_string(halfWidth);
+    string HalfHeight = to_string(halfHeight);
+    string Width = to_string(getWidth());
+    string Height = to_string(getHeight());
+
+    string retPSCode = "newpath\n" +
+                        HalfWidth + " " + HalfHeight + " moveto\n" +
+                        Width + " 0 rlineto\n" +
+                        "0 " + Height + " rlineto\n" +
+                        "0 " + Width + " sub 0 rlineto\n" +
+                        "closepath\n";
+
+    return retPSCode;
 }
 
 Spacer::Spacer(double width, double height) {

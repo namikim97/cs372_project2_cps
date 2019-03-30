@@ -45,7 +45,7 @@ class Layered : public Shape
 {
 public:
     Layered(std::initializer_list<shared_ptr<Shape>> Shapes);
-    std::string getPostScriptCode() const override;
+    virtual string getPostScriptCode() const override;
 
 private:
     std::string _postScriptCode;

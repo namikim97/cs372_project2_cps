@@ -23,7 +23,7 @@ string Rotated::getPostScriptCode() const
 {
     string retPSCode;
 
-    retPSCode = to_string((int)_rotation) + " rotate \n" + _postScriptCode;
+    retPSCode = to_string((int)_rotation) + " rotate\n" + _postScriptCode;
 
     return retPSCode;
 }
@@ -67,23 +67,23 @@ Layered::Layered(std::initializer_list<shared_ptr<Shape>> Shapes)
 
     std::string retPSCode;
     double xCenterCoord = getWidth() / 2.0;
-    xCenterCoord += (72*2);
     double yCenterCoord = getHeight() / 2.0;
-    yCenterCoord += (72+2);
+    xCenterCoord += (72*2);
+    yCenterCoord += (72*2);
 
-    for(auto i=0; i<vecShapes.size(); ++i)
-    {
-        xCenterCoord -= (vecShapes[i]->getWidth()) / 2.0;
-        yCenterCoord -= (vecShapes[i]->getHeight()) / 2.0;
-        //retPSCode += drawToPage(*vecShapes[i], 0, 0);
+    for(int i=0; i<vecShapes.size(); ++i)
+    {   
+        yCenterCoord -= vecShapes[i]->getHeight() / 2.0;
+        xCenterCoord -= vecShapes[i]->getWidth() / 2.0;
+        retPSCode += drawShape(*vecShapes[i], 0, 0);
     }
 
     _postScriptCode = retPSCode;
 }
 
-std::string Layered::getPostScriptCode() const
+string Layered::getPostScriptCode() const
 {
-    return _postScriptCode;;
+    return _postScriptCode;
 }
 
 

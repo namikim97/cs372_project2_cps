@@ -41,9 +41,7 @@ private:
 protected:
     void setHeight(double height);
     void setWidth(double width);
-
-    //for testing later
-    //string drawShape(const shape &s, int x, int y);
+    std::string drawShape(const Shape &s, int x, int y);
 };
 
 // Basic Shapes
@@ -109,15 +107,14 @@ public:
 class Square : public Polygon
 {
 public:
-    Square(int sideLength): Polygon(4, sideLength){};
-
+    Square(double sideLength): Polygon(4, sideLength){};
 };
 
 // Alex
 class Triangle : public Polygon
 {
 public:
-    Triangle(int sideLength): Polygon(3, sideLength){};
+    Triangle(double sideLength): Polygon(3, sideLength){};
 };
 
 #endif //CPS_SHAPES_H
