@@ -140,19 +140,23 @@ double Polygon::getInnerAngle() const
 
 string Polygon::getPostScriptCode() const
 {
-    string retPSCode = R"(
-    newpath
-    XDRAW YDRAW moveto
-    1 1 SIDESMINUSONE {
-        SIDELENGTH 0 rlineto
-        ROTATIONANGLE rotate
-    } for
-        closepath
-        stroke
-        )";
+    double sideminusone = getNumOfSides() - 1;
+    string SideMinusOne = to_string(sideminusone);
+    double roationangle = 180 - getInnerAngle();
+    string RotationAngle = to_string(roationangle);
+    string draw_X = to_string(getSideLength()/2);
+    string draw_Y = to_string(getHeight()/2);
+    string SideLength = to_string(getSideLength());
 
-    double SIDESMINUSONE = getNumOfSides() - 1;
-    double ROTATIONANGLE = 180 - getInnerAngle();
+    string retPSCode = 
+        "newpath\n" + 
+        draw_X + " " + draw_Y + " moveto\n" +
+        "1 1 " + SideMinusOne + " {\n" +
+        SideLength + " 0 rlineto\n" + 
+        RotationAngle + " rotate\n" +
+        "} for\n" + 
+        "closepath\n" +
+        "stroke\n";
 
     return retPSCode;
 }
