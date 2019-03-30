@@ -26,22 +26,33 @@ void testShapes(void)
 {
 	Circle circle1(20);
 	Polygon pentagon1(5, 30);
+	Polygon hexagon1(6, 20);
+	Rectangle rect(144, 72);
+	// Hey Alex you can uncomment the last two shapes when you're done writing them!
 	//Triangle tri(3, 20);
 	//Square sq(20, 20);
 
-	Rectangle rect(144, 72);
-
 	Page basicShapes;
-
-	basicShapes.drawToPage(rect, 200, 200);
 	basicShapes.drawToPage(circle1, 40, 40);
-
 	basicShapes.drawToPage(pentagon1, 144, 144);
+	basicShapes.drawToPage(hexagon1, 100, 100);
+	basicShapes.drawToPage(rect, 200, 200);
 	// basicShapes.drawToPage(tri, 200, 200);
 	// basicShapes.drawToPage(sq, 300, 300);
 
+	Rotated rotPent(pentagon1, 20);
+	Rotated rotHex(hexagon1, 15);
+	Rotated rotRec(rect, 50);
+	
+	Page rotatedShapes;
+	rotatedShapes.drawToPage(rotPent, 55, 55);
+	rotatedShapes.drawToPage(rotHex, 120, 120);
+	rotatedShapes.drawToPage(rotRec, 250, 250);
+	
+
 	PSOutput output;
 	output.addPage(basicShapes);
+	output.addPage(rotatedShapes);
 	cout << "Testing file output" << endl;
 	output.PSOutput_File("testShapes.ps");
 }
