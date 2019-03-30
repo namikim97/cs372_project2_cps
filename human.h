@@ -21,8 +21,8 @@ public:
     void initializeTorso();
     void initializeArms();
     void initializeLegs();
-    string getHeadPSCode(int, int) const;
-    string getPostScriptCode(int, int) const override;
+    string getHeadPSCode() const;
+    string getPostScriptCode() const override;
     int getRandomInt(unsigned int, unsigned int) const;
 
 private:

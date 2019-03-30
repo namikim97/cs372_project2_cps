@@ -3,7 +3,9 @@
 #include "human.h"
 
 Human::Human(double height, double obesity)
-    : _height(height), _obesity(obesity) {}
+    : _height(height), _obesity(obesity) {
+    initializeHead();
+}
 
 double Human::getHeight() const {
     return _height;
@@ -19,7 +21,7 @@ void Human::initializeHead() {
     if(headType == 5)
         _head = unique_ptr<Shape>(new class Circle(getHeight()/8));
     else
-        _head = unique_ptr<Shape>(new class Polygon(headType, getHeight()/8));
+        _head = unique_ptr<Shape>(new class Polygon(10, 10));
 }
 
 void Human::initializeTorso() {
@@ -34,12 +36,12 @@ void Human::initializeLegs() {
 
 }
 
-string Human::getHeadPSCode(int x, int y) const {
-    return _head->getPostScriptCode(x, y);
+string Human::getHeadPSCode() const {
+    return _head->getPostScriptCode();
 }
 
-string Human::getPostScriptCode(int x, int y) const {
-    string PostScriptCode = getHeadPSCode(x, y);
+string Human::getPostScriptCode() const {
+    string PostScriptCode = getHeadPSCode();
 
     return PostScriptCode;
 }
