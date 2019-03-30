@@ -40,8 +40,8 @@ string Shape::drawShape(const Shape &s, int x, int y)
 Circle::Circle(double radius)
 {
     _radius = radius;
-    setHeight(radius * 2);
-    setWidth(radius * 2);
+    setHeight(radius * 2.0);
+    setWidth(radius * 2.0);
 }
 
 double Circle::getRadius() const
@@ -71,12 +71,12 @@ Polygon::Polygon(int numOfSides, double sideLength)
 
 double Polygon::calcTriHeight()
 {
-    return getTriHypot() * cos(M_PI/getNumOfSides());
+    return getTriHypot() * cos(PI/getNumOfSides());
 }
 
 double Polygon::calcTriHypot()
 {
-    return ( (getSideLength()/2) / (sin(M_PI/getNumOfSides())) );
+    return ( (getSideLength()/2.0) / (sin(PI/getNumOfSides())) );
 }
 
 double Polygon::calcHeight()
@@ -85,7 +85,7 @@ double Polygon::calcHeight()
 
     if(sides % 2 == 0)
     {
-        return getTriHeight() * 2;
+        return getTriHeight() * 2.0;
     }
     else
     {
@@ -115,7 +115,7 @@ double Polygon::calcWidth()
     else // number of sides is odd and it's not a triangle
     {
         double bigTriAngle = (360.0/sides) * ((sides - 1.0)/2.0);
-        return 2.0 * getTriHypot() * sin((bigTriAngle/2.0) * (M_PI/180));
+        return 2.0 * getTriHypot() * sin((bigTriAngle/2.0) * (PI/180));
     }
 }
 
@@ -152,12 +152,12 @@ double Polygon::getInnerAngle() const
 
 string Polygon::getPostScriptCode() const
 {
-    double sideminusone = getNumOfSides() - 1;
+    double sideminusone = getNumOfSides() - 1.0;
     string SideMinusOne = to_string(sideminusone);
-    double roationangle = 180 - getInnerAngle();
+    double roationangle = 180.0 - getInnerAngle();
     string RotationAngle = to_string(roationangle);
-    string draw_X = to_string(-getSideLength()/2);
-    string draw_Y = to_string(-getHeight()/2);
+    string draw_X = to_string(-getSideLength()/2.0);
+    string draw_Y = to_string(-getHeight()/2.0);
     string SideLength = to_string(getSideLength());
 
     string retPSCode = 
@@ -215,7 +215,7 @@ Spacer::Spacer(double width, double height) {
 }
 
 string Spacer::getPostScriptCode() const {
-    double halfWidth = getWidth()/2, halfHeight = getHeight()/2;
+    double halfWidth = getWidth()/2.0, halfHeight = getHeight()/2.0;
     string originX = "x " + to_string(halfWidth) + " sub";
     string originY = "y " + to_string(halfHeight) + " sub";
     string strWidth = to_string(getWidth()), strHeight = to_string(getHeight());

@@ -62,13 +62,12 @@ void testShapes(void)
 	auto d = make_shared<Polygon>(5, 20);
 
 	auto layTri = make_shared<Triangle>(50);
-	auto laySqu = make_shared<Square>(20);
 	auto layCir = make_shared<Circle>(20);
 	auto layRec = make_shared<Rectangle>(40, 20);
 
 	Page layeredShapes;
-	Layered layer{ layTri, laySqu, layCir };
-	Layered layer2{ layRec, layCir, laySqu };
+	Layered layer{ layTri, layCir, layRec };
+	Layered layer2{ layRec, layCir };
 	layeredShapes.drawToPage(layer, 144, 144);
 	layeredShapes.drawToPage(layer2, 4*72, 4*72);
 

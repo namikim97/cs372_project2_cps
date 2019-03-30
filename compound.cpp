@@ -10,7 +10,7 @@ using std::to_string;
 Rotated::Rotated(const Shape &s, double rotation):_rotation(rotation),
                                                  _postScriptCode(s.getPostScriptCode())
 {
-    const double radians = (_rotation * 2.0 * M_PI)/360.0;
+    const double radians = (_rotation * 2.0 * PI)/360.0;
 
     _origWidth = s.getWidth();
     _origHeight = s.getHeight();

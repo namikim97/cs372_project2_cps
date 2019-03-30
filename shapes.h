@@ -25,6 +25,9 @@ using std::make_unique;
 using std::shared_ptr;
 using std::make_shared;
 
+const double PI = 4*atan(1); 
+
+
 // Nami
 class Shape
 {
