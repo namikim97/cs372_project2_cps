@@ -15,7 +15,9 @@ using std::cout;
 void Page::drawToPage(const Shape &s, int x, int y)
 {
     _postScriptCode += "gsave \n";
-    _postScriptCode += to_string(x) + " " + to_string(y) + " translate\n";
+    _postScriptCode += "\\x " + to_string(x) + " " + "def";
+    _postScriptCode += "\\y " + to_string(y) + " " + "def";
+    _postScriptCode += "x y translate\n";
     _postScriptCode += s.getPostScriptCode();
     _postScriptCode += "\n stroke \n grestore \n";
 }
