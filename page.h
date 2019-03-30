@@ -5,6 +5,8 @@
 #define CPS_PAGE_H
 
 #include "shapes.h"
+#include <string>
+#include <vector>
 
 // postscript output
 
@@ -12,21 +14,21 @@ class Page
 {
 public:
     void drawToPage(const Shape &s, int x, int y);
-    string getPostScriptCode();
+    std::string getPostScriptCode();
 
 private:
-    string _postScriptCode;
+    std::string _postScriptCode;
 };
 
 class PSOutput
 {
 public:
     void addPage(const Page &p);
-    void PSOutput_File(string filename);
+    void PSOutput_File(std::string filename);
 
 private:
-    string _postScriptCode;
-    vector<Page> pages;
+    std::string _postScriptCode;
+    std::vector<Page> pages;
 };
 
 

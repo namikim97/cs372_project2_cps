@@ -6,12 +6,20 @@
 //
 // CPS Main
 
-<<<<<<< HEAD
+
 #include "page.h"
 #include "shapes.h"
 #include "compound.h"
-=======
-//#include "cps.h"
+
+#include <string>
+using std::string;
+using std::to_string;
+#include <iostream>
+using std::cout;
+using std::cin;
+using std::endl;
+#include <fstream>
+using std::ofstream;
 
 double Shape::getHeight() const
 {
@@ -222,12 +230,12 @@ void PSOutput::PSOutput_File(string filename)
     of.close();
     cout << "Postscript Output Successful" << endl;
 }
->>>>>>> cc9181381f17e4a6866f3d3e12cc0e26ee42bcd7
+
 
 void testShapes(void)
 {
-	Circle circle(20);
-	Polygon pentagon(5, 30);
+	Circle circle1(20);
+	Polygon pentagon1(5, 30);
 	//Rectangle recta(20, 30);
 	//Triangle tri(3, 20);
 	//Square sq(20, 20);

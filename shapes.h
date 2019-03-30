@@ -5,23 +5,23 @@
 #define CPS_SHAPES_H
 
 #include <string>
-using std::string;
-using std::to_string;
+//using std::string;
+//using std::to_string;
 //#include <math.h>
 #include <vector>
-using std::vector;
+//using std::vector;
 #include <cmath>
-using std::sin;
-using std::cos;
-using std::abs;
+//using std::sin;
+//using std::cos;
+//using std::abs;
 #include<iostream>
-using std::cout;
-using std::endl;
+//using std::cout;
+//using std::endl;
 #include<fstream>
-using std::ofstream;
+//using std::ofstream;
 #include<memory>
-using std::shared_ptr;
-using std::make_shared;
+//using std::shared_ptr;
+//using std::make_shared;
 
 // Nami
 class Shape
@@ -29,7 +29,7 @@ class Shape
 public:
     virtual double getHeight() const;
     virtual double getWidth() const;
-    virtual string getPostScriptCode() const = 0;
+    virtual std::string getPostScriptCode() const = 0;
     virtual ~Shape() = default;
 
 private:
@@ -52,7 +52,7 @@ class Circle : public Shape
 public:
     Circle(double radius);
     double getRadius() const;
-    string getPostScriptCode() const override;
+    std::string getPostScriptCode() const override;
 
 private:
     double _radius;
@@ -74,7 +74,7 @@ public:
     double getTriHypot() const;
     double getInnerAngle() const;
 
-    string getPostScriptCode() const override;
+    std::string getPostScriptCode() const override;
 
 private:
     int _numOfSides;

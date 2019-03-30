@@ -2,6 +2,8 @@
 // Source file for Shape classes.
 
 #include "shapes.h"
+#include <string>
+using std::string;
 
 double Shape::getHeight() const
 {

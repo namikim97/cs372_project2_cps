@@ -2,6 +2,9 @@
 // Source file for Compound Shape classes.
 
 #include "compound.h"
+#include <string>
+using std::string;
+using std::to_string;
 
 Rotated::Rotated(const Shape&s, double rotation):_rotation(rotation),
                                                  _postScriptCode(s.getPostScriptCode())

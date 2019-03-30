@@ -2,6 +2,15 @@
 // Source file for Page class.
 
 #include "page.h"
+#include <string>
+using std::string;
+using std::to_string;
+#include <fstream>
+using std::ofstream;
+#include <iostream>
+using std::cout;
+
+
 
 void Page::drawToPage(const Shape &s, int x, int y)
 {
