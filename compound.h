@@ -82,7 +82,33 @@ private:
 
 class Horizontal : public Shape
 {
-    // TO DO
+public:
+    template <typename T>
+    Horizontal( std::initializer_list<shared_ptr<T>> list) : _shapes(std::move(list)){};
+
+    string getPostScriptCode() const override {
+        return "dummy";
+    }
+
+    double getWidth() const override {
+        double total = 0.0;
+        for(auto const & shape : _shapes) {
+            total += shape->getWidth();
+        }
+        return total;
+    }
+
+    double getHeight() const override {
+        double max = 0.0;
+        for(auto const & shape : _shapes) {
+            if (shape->getHeight() >= max)
+                max = shape->getHeight();
+        }
+        return max;
+    }
+
+private:
+    vector<std::shared_ptr<Shape>> _shapes;
 };
 
 #endif //CPS_COMPOUND_H

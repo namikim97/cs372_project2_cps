@@ -80,7 +80,7 @@ TEST_CASE( "Can make a polygon", "[Pentagon]" ) {
     REQUIRE( (poly.getSideLength()) == 6 );
 }
 
-TEST_CASE( "Can make a polygon", "[Hexagon]" ) {
+TEST_CASE( "Can make a Hexagon", "[Hexagon]" ) {
     class Polygon poly(6, 10);
     REQUIRE( (poly.getNumOfSides()) == 6 );
     REQUIRE( (poly.getSideLength()) == 10 );
@@ -111,6 +111,20 @@ TEST_CASE( "Compound Shape: Vertical") {
     SECTION( "Vertical: ctor-> {Rectangle, Spacer, Rectangle}" ) {
         REQUIRE( vert.getWidth() == 72 );
         REQUIRE( vert.getHeight() == 144 );
+    }
+}
+
+
+TEST_CASE( "Compound Shape: Horizontal") {
+    // TODO: Ideally test all shapes by the end.
+    shared_ptr<Shape> tRec(new class Rectangle(72,36));
+    shared_ptr<Shape> spc(new class Spacer(18,36));
+    shared_ptr<Shape> bRec(new class Rectangle(36,72));
+    auto list = {tRec, spc, bRec};
+    Horizontal horizontal(list);
+    SECTION( "Horizontal: ctor-> {Rectangle, Spacer, Rectangle}" ) {
+        REQUIRE( horizontal.getWidth() == 126 );
+        REQUIRE( horizontal.getHeight() == 72 );
     }
 
 }
