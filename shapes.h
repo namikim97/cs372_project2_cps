@@ -61,7 +61,7 @@ private:
     double _radius;
 };
 
-// Nami
+
 class Polygon : public Shape
 {
 public:
@@ -87,7 +87,7 @@ private:
     double _innerAngle;
 };
 
-// Simeon
+
 class Rectangle : public Shape
 {
 public:
@@ -96,7 +96,7 @@ public:
 
 };
 
-// Simeon
+
 class Spacer : public Shape
 {
 public:
@@ -106,18 +106,29 @@ public:
 };
 
 
-// Alex
 class Square : public Polygon
 {
 public:
     explicit Square(double sideLength): Polygon(4, sideLength){}; //4 is an int, # of sides in polygon
 };
 
-// Alex
+
 class Triangle : public Polygon
 {
 public:
     explicit Triangle(double sideLength): Polygon(3, sideLength){}; //3 is an int,# of sides in polygon
+};
+
+
+
+class RainbowSnowman : public Shape
+{
+public:
+    explicit RainbowSnowman(double radius);;
+    string getPostScriptCode() const override; //may change _radius so not const
+
+private:
+    double _radius;
 };
 
 #endif //CPS_SHAPES_H

@@ -80,6 +80,11 @@ void testShapes(void)
 	auto layPent = make_shared<Polygon>(5, 20);
 	auto layHex = make_shared<Polygon>(6, 25);
 
+	RainbowSnowman sm(60.0);
+	Page snowMan;
+	snowMan.drawToPage(sm, 40, 40);
+
+
 	Page layeredShapes;
 	Layered layer{ layTri, layCir, layHex, layRec, layPent};
 	Layered layer2{ layRec, layCir };
@@ -105,6 +110,7 @@ void testShapes(void)
 
 	PSOutput output;
 	output.addPage(basicShapes);
+    output.addPage(snowMan);
 	output.addPage(rotatedShapes);
 	output.addPage(scaledShapes);
 	output.addPage(layeredShapes);
