@@ -64,6 +64,10 @@ void Human::initializeArms() {
 void Human::initializeLegs() {
     auto legType = getRandomInt(1, 2);
 
+    _leftLeg = unique_ptr<Shape>
+                (new Rotated(Rectangle(0.5*getUnit(), 2*getUnit()), 180));
+    _rightLeg = unique_ptr<Shape>
+                (new Rotated(Rectangle(0.5*getUnit(), 2*getUnit()), 180));
 }
 
 string Human::getHeadPSCode() const {
@@ -82,16 +86,16 @@ string Human::getTorsoPSCode() const {
 }
 
 string Human::getArmsPSCode() const {
-    double torsoToArm = -getUnit();
-    double headToArm = -.25*getUnit();
+    double torsoToArmX = -getUnit();
+    double headToArmY = -.25*getUnit();
     string PostScriptCode = "gsave\n" +
-                            to_string(torsoToArm) + " " + to_string(headToArm) +
+                            to_string(torsoToArmX) + " " + to_string(headToArmY) +
                             " translate\n" +
                             _leftArm->getPostScriptCode() +
                             "stroke\ngrestore\n";
-    torsoToArm = getUnit();
+    torsoToArmX = getUnit();
     PostScriptCode += "gsave\n" +
-                      to_string(torsoToArm) + " " + to_string(headToArm) +
+                      to_string(torsoToArmX) + " " + to_string(headToArmY) +
                       " translate\n" +
                       _rightArm->getPostScriptCode() +
                       "stroke\ngrestore\n";
@@ -100,7 +104,21 @@ string Human::getArmsPSCode() const {
 }
 
 string Human::getLegsPSCode() const {
-    string PostScriptCode = "dummy";
+    // TODO
+    double torsoToLegX = -getUnit();
+    double torsoToLegY = -3*getUnit();
+
+    string PostScriptCode = "gsave\n" +
+                            to_string(torsoToLegX) + " " + to_string(torsoToLegY) +
+                            " translate\n" +
+                            _leftLeg->getPostScriptCode() +
+                            "stroke\ngrestore\n";
+    torsoToLegX = getUnit();
+    PostScriptCode += "gsave\n" +
+                      to_string(torsoToLegX) + " " + to_string(torsoToLegY) +
+                      " translate\n" +
+                      _rightLeg->getPostScriptCode() +
+                      "stroke\ngrestore\n";
 
     return PostScriptCode;
 }
@@ -108,7 +126,8 @@ string Human::getLegsPSCode() const {
 string Human::getPostScriptCode() const {
     string PostScriptCode = getHeadPSCode() +
                             getTorsoPSCode() +
-                            getArmsPSCode();
+                            getArmsPSCode() +
+                            getLegsPSCode();
     return PostScriptCode;
 }
 

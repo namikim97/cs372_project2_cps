@@ -38,7 +38,8 @@ private:
     unique_ptr<Shape> _torso;
     unique_ptr<Shape> _leftArm;
     unique_ptr<Shape> _rightArm;
-    unique_ptr<Shape> _legs;
+    unique_ptr<Shape> _leftLeg;
+    unique_ptr<Shape> _rightLeg;
 
     double _height;
     double _width;
