@@ -72,14 +72,14 @@ Polygon::Polygon(int numOfSides, double sideLength)
 
 double Polygon::calcTriHeight()
 {
-    double test1 = getTriHypot() * std::cos(3.14/getNumOfSides()); ////////////////////////debugging
+    double test1 = getTriHypot() * std::cos(M_PI/getNumOfSides()); ////////////////////////debugging
     return getTriHypot() * std::cos(3.14/getNumOfSides());
 }
 
 double Polygon::calcTriHypot()
 {
-    double test = (getSideLength()/2.0) / (std::sin(3.14/getNumOfSides())); //////////////////////debugging
-    return ( (getSideLength()/2.0) / (std::sin(3.14/getNumOfSides())) );
+    double test = (getSideLength()/2.0) / (std::sin(M_PI/getNumOfSides())); //////////////////////debugging
+    return ( (getSideLength()/2.0) / (std::sin(M_PI/getNumOfSides())) );
 }
 
 double Polygon::calcHeight()
@@ -161,6 +161,7 @@ string Polygon::getPostScriptCode() const
     double roationangle = 180.0 - getInnerAngle();
     string RotationAngle = to_string(roationangle);
     string draw_X = to_string(-getSideLength()/2.0);
+    //string draw_Y = to_string((float) -getHeight() / 2.0);
     string draw_Y;
     if ((float)-getHeight()/2.0 < 0.0001){
         draw_Y = "0.0";

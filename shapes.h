@@ -25,7 +25,10 @@ using std::make_unique;
 using std::shared_ptr;
 using std::make_shared;
 
-const double PI = 4*atan(1);
+//const double PI = 4*atan(1);
+
+const double FOUR = 4.0;
+const double THREE = 3.0;
 
 // Nami
 class Shape
@@ -109,14 +112,14 @@ public:
 class Square : public Polygon
 {
 public:
-    Square(double sideLength): Polygon(4.0, sideLength){};
+    Square(double sideLength): Polygon(FOUR, sideLength){};
 };
 
 // Alex
 class Triangle : public Polygon
 {
 public:
-    Triangle(double sideLength): Polygon(3.0, sideLength){};
+    Triangle(double sideLength): Polygon(THREE, sideLength){};
 };
 
 #endif //CPS_SHAPES_H
