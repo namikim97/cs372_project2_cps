@@ -3,6 +3,7 @@
 
 #include "shapes.h"
 #include <string>
+#include <cmath>
 using std::string;
 
 double Shape::getHeight() const
@@ -71,13 +72,14 @@ Polygon::Polygon(int numOfSides, double sideLength)
 
 double Polygon::calcTriHeight()
 {
-    return getTriHypot() * cos(PI/getNumOfSides());
+    double test1 = getTriHypot() * std::cos(3.14/getNumOfSides()); ////////////////////////debugging
+    return getTriHypot() * std::cos(3.14/getNumOfSides());
 }
 
 double Polygon::calcTriHypot()
 {
-    return ( (getSideLength()/2.0) / (sin(PI/getNumOfSides())) );
-
+    double test = (getSideLength()/2.0) / (std::sin(3.14/getNumOfSides())); //////////////////////debugging
+    return ( (getSideLength()/2.0) / (std::sin(3.14/getNumOfSides())) );
 }
 
 double Polygon::calcHeight()
@@ -116,7 +118,7 @@ double Polygon::calcWidth()
     else // number of sides is odd and it's not a triangle
     {
         double bigTriAngle = (360.0/sides) * ((sides - 1.0)/2.0);
-        return 2.0 * getTriHypot() * sin((bigTriAngle/2.0) * (PI/180));
+        return 2.0 * getTriHypot() * sin((bigTriAngle/2.0) * (3.14/180));
     }
 }
 
@@ -151,6 +153,7 @@ double Polygon::getInnerAngle() const
     return _innerAngle;
 }
 
+
 string Polygon::getPostScriptCode() const
 {
     double sideminusone = getNumOfSides() - 1.0;
@@ -158,16 +161,22 @@ string Polygon::getPostScriptCode() const
     double roationangle = 180.0 - getInnerAngle();
     string RotationAngle = to_string(roationangle);
     string draw_X = to_string(-getSideLength()/2.0);
-    string draw_Y = to_string(-getHeight()/2.0);
+    string draw_Y;
+    if ((float)-getHeight()/2.0 < 0.0001){
+        draw_Y = "0.0";
+    }
+    else {
+        draw_Y = to_string((float) -getHeight() / 2.0);
+    }
     string SideLength = to_string(getSideLength());
 
-    string retPSCode =
-        "newpath\n" +
+    string retPSCode = 
+        "newpath\n" + 
         draw_X + " " + draw_Y + " moveto\n" +
         "1 1 " + SideMinusOne + " {\n" +
-        SideLength + " 0 rlineto\n" +
+        SideLength + " 0 rlineto\n" + 
         RotationAngle + " rotate\n" +
-        "} for\n" +
+        "} for\n" + 
         "closepath\n";
 
     return retPSCode;

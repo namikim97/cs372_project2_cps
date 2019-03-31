@@ -7,7 +7,7 @@
 #include <string>
 using std::string;
 using std::to_string;
-#include <math.h>
+//#include <math.h>
 #include <vector>
 using std::vector;
 #include <cmath>
