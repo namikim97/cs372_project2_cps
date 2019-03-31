@@ -59,7 +59,8 @@ class Vertical : public Shape
 {
 public:
     Vertical(std::initializer_list<shared_ptr<Shape>> Shapes);
-    virtual string getPostScriptCode() const override;
+
+    string getPostScriptCode() const override;
 private:
     std::string _postScriptCode;
 };
@@ -68,7 +69,8 @@ class Horizontal : public Shape
 {
 public:
     Horizontal(std::initializer_list<shared_ptr<Shape>> Shapes);
-    virtual string getPostScriptCode() const override;
+
+    string getPostScriptCode() const override;
 private:
     std::string _postScriptCode;
 };

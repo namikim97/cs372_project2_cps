@@ -63,38 +63,46 @@ void testShapes(void)
     auto b = make_shared<Rotated>(pentagon1, 60);
     auto c = make_shared<Circle>(20);
     auto d = make_shared<Polygon>(5, 20);
+
+    auto vTri = make_shared<Triangle>(10);
 	auto vCir = make_shared<Circle>(10);
 	auto vRec = make_shared<Rectangle>(40, 20);
+
+	auto hTri = make_shared<Triangle>(10);
+	auto hCir = make_shared<Circle>(10);
+	auto hRec = make_shared<Rectangle>(40, 20);
 
 
 	auto layTri = make_shared<Triangle>(50);
 	auto layCir = make_shared<Circle>(20);
 	auto layRec = make_shared<Rectangle>(40, 20);
+	auto layPent = make_shared<Polygon>(5, 20);
 
 	Page layeredShapes;
-	Layered layer{ layTri, layCir, layRec };
+	Layered layer{ layTri, layCir, layRec, layPent};
 	Layered layer2{ layRec, layCir };
 	layeredShapes.drawToPage(layer, 144, 144);
 	layeredShapes.drawToPage(layer2, 4*72, 4*72);
 	//cout << layer.getPostScriptCode() << endl;
 
 	Page verticalShapes;
-	Vertical vert{ vRec, vCir, vCir, vCir, vRec };
+	Vertical vert{ vRec, vCir, vCir, vRec };
 	verticalShapes.drawToPage(vert, 100, 200);
 	//cout << vert.getPostScriptCode() << endl;
 
+/*
 	Page horizShapes;
-	Vertical horiz{ vRec, vCir, vCir, vCir, vRec };
+	Vertical horiz{ hRec, hCir, hCir, hCir, hRec };
 	horizShapes.drawToPage(vert, 300, 200);
 	cout << horiz.getPostScriptCode() << endl;
-
+*/
 	PSOutput output;
 	output.addPage(basicShapes);
 	output.addPage(rotatedShapes);
 	output.addPage(scaledShapes);
 	output.addPage(layeredShapes);
 	output.addPage(verticalShapes);
-	output.addPage(horizShapes);
+	//output.addPage(horizShapes);
 	cout << "Testing file output" << endl;
 	output.PSOutput_File("testShapes.ps");
 }
