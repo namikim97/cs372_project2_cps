@@ -77,6 +77,7 @@ double Polygon::calcTriHeight()
 double Polygon::calcTriHypot()
 {
     return ( (getSideLength()/2.0) / (sin(PI/getNumOfSides())) );
+
 }
 
 double Polygon::calcHeight()
@@ -160,13 +161,13 @@ string Polygon::getPostScriptCode() const
     string draw_Y = to_string(-getHeight()/2.0);
     string SideLength = to_string(getSideLength());
 
-    string retPSCode = 
-        "newpath\n" + 
+    string retPSCode =
+        "newpath\n" +
         draw_X + " " + draw_Y + " moveto\n" +
         "1 1 " + SideMinusOne + " {\n" +
-        SideLength + " 0 rlineto\n" + 
+        SideLength + " 0 rlineto\n" +
         RotationAngle + " rotate\n" +
-        "} for\n" + 
+        "} for\n" +
         "closepath\n";
 
     return retPSCode;

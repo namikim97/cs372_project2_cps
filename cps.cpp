@@ -25,6 +25,7 @@ using std::ofstream;
 using std::make_shared;
 #include <initializer_list>
 
+
 void testShapes(void)
 {
 	Circle circle1(20);
@@ -80,10 +81,6 @@ void testShapes(void)
 	layeredShapes.drawToPage(layer, 144, 144);
 	layeredShapes.drawToPage(layer2, 4*72, 4*72);
 
-	Human human(360, 1);
-	Page humanShapes;
-	humanShapes.drawToPage(human, 288, 720);
-
 	cout << layer.getPostScriptCode() << endl;
 
 
@@ -98,7 +95,6 @@ void testShapes(void)
 	output.addPage(scaledShapes);
 	output.addPage(layeredShapes);
 	output.addPage(verticalShapes);
-	output.addPage(humanShapes);
 	cout << "Testing file output" << endl;
 	output.PSOutput_File("testShapes.ps");
 }
