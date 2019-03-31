@@ -83,11 +83,14 @@ void testShapes(void)
 
 	cout << layer.getPostScriptCode() << endl;
 
-
 	Page verticalShapes;
 	Vertical vert{ vTri, vCir, vRec };
 	verticalShapes.drawToPage(vert, 50, 50);
 	cout << vert.getPostScriptCode() << endl;
+
+	Human human(360, 1);
+	Page humanShapes;
+	humanShapes.drawToPage(human, 288, 648);
 
 	PSOutput output;
 	output.addPage(basicShapes);
@@ -95,10 +98,10 @@ void testShapes(void)
 	output.addPage(scaledShapes);
 	output.addPage(layeredShapes);
 	output.addPage(verticalShapes);
+	output.addPage(humanShapes);
 	cout << "Testing file output" << endl;
 	output.PSOutput_File("testShapes.ps");
 }
-
 
 int main()
 {
