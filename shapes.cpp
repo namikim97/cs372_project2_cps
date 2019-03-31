@@ -72,14 +72,14 @@ Polygon::Polygon(int numOfSides, double sideLength)
 
 double Polygon::calcTriHeight()
 {
-    double test1 = getTriHypot() * std::cos(3.14/getNumOfSides()); ////////////////////////debugging
+    double test1 = getTriHypot() * std::cos(M_PI/getNumOfSides()); ////////////////////////debugging
     return getTriHypot() * std::cos(3.14/getNumOfSides());
 }
 
 double Polygon::calcTriHypot()
 {
-    double test = (getSideLength()/2.0) / (std::sin(3.14/getNumOfSides())); //////////////////////debugging
-    return ( (getSideLength()/2.0) / (std::sin(3.14/getNumOfSides())) );
+    double test = (getSideLength()/2.0) / (std::sin(M_PI/getNumOfSides())); //////////////////////debugging
+    return ( (getSideLength()/2.0) / (std::sin(M_PI/getNumOfSides())) );
 }
 
 double Polygon::calcHeight()

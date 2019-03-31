@@ -83,10 +83,10 @@ void testShapes(void)
 	verticalShapes.drawToPage(vert, 100, 200);
 	//cout << vert.getPostScriptCode() << endl;
 
-	//Page horizShapes;
-	//Vertical horiz{ vRec, vCir, vCir, vCir, vRec };
-	//horizShapes.drawToPage(vert, 500, 200);
-	//cout << horiz.getPostScriptCode() << endl;
+	Page horizShapes;
+	Vertical horiz{ vRec, vCir, vCir, vCir, vRec };
+	horizShapes.drawToPage(vert, 300, 200);
+	cout << horiz.getPostScriptCode() << endl;
 
 	PSOutput output;
 	output.addPage(basicShapes);
@@ -94,7 +94,7 @@ void testShapes(void)
 	output.addPage(scaledShapes);
 	output.addPage(layeredShapes);
 	output.addPage(verticalShapes);
-	//output.addPage(horizShapes);
+	output.addPage(horizShapes);
 	cout << "Testing file output" << endl;
 	output.PSOutput_File("testShapes.ps");
 }
