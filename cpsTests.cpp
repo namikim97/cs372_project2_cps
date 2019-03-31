@@ -128,4 +128,3 @@ TEST_CASE( "Compound Shape: Horizontal") {
     }
 
 }
-

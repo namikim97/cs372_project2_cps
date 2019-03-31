@@ -10,6 +10,7 @@
 #include <string>
 #include <initializer_list>
 #include <memory> //for std::unique_ptr
+#include <vector>
 
 // Compound Shapes
 
@@ -42,7 +43,12 @@ private:
 
 class Layered : public Shape
 {
-    // TO DO
+public:
+    Layered(std::initializer_list<shared_ptr<Shape>> Shapes);
+    std::string getPostScriptCode() const override;
+
+private:
+    std::string _postScriptCode;
 };
 
 // Simeon
