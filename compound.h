@@ -51,49 +51,25 @@ private:
     std::string _postScriptCode;
 };
 
-// Simeon
+
+
 
 class Vertical : public Shape
 {
 public:
-    Vertical( std::initializer_list<shared_ptr<Shape>> list) : _shapes(std::move(list)){};
-
-
-    string getPostScriptCode() const override {
-        string retPsCode;
-        for (auto shape : _shapes){
-            retPsCode = retPsCode + shape->getPostScriptCode();
-            retPsCode = retPsCode + shape->getPostScriptCode();
-        }
-        return retPsCode;
-    }
-
-
-    double getWidth() const override;
-
-    double getHeight() const override;
-
+    Vertical(std::initializer_list<shared_ptr<Shape>> Shapes);
+    virtual string getPostScriptCode() const override;
 private:
-    vector<std::shared_ptr<Shape>> _shapes;
-
+    std::string _postScriptCode;
 };
 
 class Horizontal : public Shape
 {
 public:
-    template <typename T>
-    Horizontal( std::initializer_list<shared_ptr<T>> list) : _shapes(std::move(list)){};
-
-    string getPostScriptCode() const override {
-        return "dummy";
-    }
-
-    double getWidth() const override;
-
-    double getHeight() const override;
-
+    Horizontal(std::initializer_list<shared_ptr<Shape>> Shapes);
+    virtual string getPostScriptCode() const override;
 private:
-    vector<std::shared_ptr<Shape>> _shapes;
+    std::string _postScriptCode;
 };
 
 #endif //CPS_COMPOUND_H
