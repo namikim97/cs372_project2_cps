@@ -63,9 +63,7 @@ void testShapes(void)
     auto b = make_shared<Rotated>(pentagon1, 60);
     auto c = make_shared<Circle>(20);
     auto d = make_shared<Polygon>(5, 20);
-
-	auto vTri = make_shared<Triangle>(50);
-	auto vCir = make_shared<Circle>(20);
+	auto vCir = make_shared<Circle>(10);
 	auto vRec = make_shared<Rectangle>(40, 20);
 
 
@@ -81,9 +79,14 @@ void testShapes(void)
 	cout << layer.getPostScriptCode() << endl;
 
 	Page verticalShapes;
-	Vertical vert{ vTri, vCir, vRec };
-	verticalShapes.drawToPage(vert, 50, 50);
+	Vertical vert{ vRec, vCir, vCir, vCir, vRec };
+	verticalShapes.drawToPage(vert, 100, 200);
 	cout << vert.getPostScriptCode() << endl;
+
+	//Page horizShapes;
+	//Vertical horiz{ vRec, vCir, vCir, vCir, vRec };
+	//horizShapes.drawToPage(vert, 500, 200);
+	//cout << horiz.getPostScriptCode() << endl;
 
 	PSOutput output;
 	output.addPage(basicShapes);
@@ -91,6 +94,7 @@ void testShapes(void)
 	output.addPage(scaledShapes);
 	output.addPage(layeredShapes);
 	output.addPage(verticalShapes);
+	//output.addPage(horizShapes);
 	cout << "Testing file output" << endl;
 	output.PSOutput_File("testShapes.ps");
 }

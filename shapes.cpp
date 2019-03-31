@@ -3,6 +3,7 @@
 
 #include "shapes.h"
 #include <string>
+#include <cmath>
 using std::string;
 
 double Shape::getHeight() const
@@ -58,7 +59,7 @@ string Circle::getPostScriptCode() const
     return retPSCode;
 }
 
-Polygon::Polygon(double numOfSides, double sideLength)
+Polygon::Polygon(int numOfSides, double sideLength)
 {
     _numOfSides = numOfSides;
     _sideLength = sideLength;
@@ -71,12 +72,14 @@ Polygon::Polygon(double numOfSides, double sideLength)
 
 double Polygon::calcTriHeight()
 {
-    return getTriHypot() * cos(M_PI/getNumOfSides());
+    double test1 = getTriHypot() * std::cos(3.14/getNumOfSides()); ////////////////////////debugging
+    return getTriHypot() * std::cos(3.14/getNumOfSides());
 }
 
 double Polygon::calcTriHypot()
 {
-    return (getSideLength() / (2*sin(180/getNumOfSides() * M_PI/180)));
+    double test = (getSideLength()/2.0) / (std::sin(3.14/getNumOfSides())); //////////////////////debugging
+    return ( (getSideLength()/2.0) / (std::sin(3.14/getNumOfSides())) );
 }
 
 double Polygon::calcHeight()
@@ -85,7 +88,7 @@ double Polygon::calcHeight()
 
     if(sides % 2 == 0)
     {
-        return getTriHeight() * 2;
+        return getTriHeight() * 2.0;
     }
     else
     {
@@ -104,25 +107,25 @@ double Polygon::calcWidth()
 
     else if(sides % 4 == 0)
     {
-        return getTriHeight() * 2;
+        return getTriHeight() * 2.0;
     }
 
     else if(sides % 2 == 0)
     {
-        return getTriHypot() * 2;
+        return getTriHypot() * 2.0;
     }
 
     else // number of sides is odd and it's not a triangle
     {
-        double bigTriAngle = (360/sides) * ((sides - 1)/2);
-        return 2 * getTriHypot() * sin((bigTriAngle/2) * (M_PI/180));
+        double bigTriAngle = (360.0/sides) * ((sides - 1.0)/2.0);
+        return 2.0 * getTriHypot() * sin((bigTriAngle/2.0) * (3.14/180));
     }
 }
 
 double Polygon::calcInnerAngle()
 {
     int sides = getNumOfSides();
-    return ((sides - 2) * 180) / sides;
+    return ((sides - 2.0) * 180) / sides;
 }
 
 int Polygon::getNumOfSides() const
@@ -150,18 +153,23 @@ double Polygon::getInnerAngle() const
     return _innerAngle;
 }
 
+
 string Polygon::getPostScriptCode() const
 {
     double sideminusone = getNumOfSides() - 1.0;
     string SideMinusOne = to_string(sideminusone);
     double roationangle = 180.0 - getInnerAngle();
     string RotationAngle = to_string(roationangle);
-    double drawX = -getSideLength()/2.0;
-    double drawY = -getHeight()/2.0;
-    double sidelength = getSideLength();
-    string draw_X = to_string(drawX);
-    string draw_Y = to_string(drawY);
-    string SideLength = to_string(sidelength);
+    string draw_X = to_string(-getSideLength()/2.0);
+    //string draw_Y = to_string((float) -getHeight() / 2.0);
+    string draw_Y;
+    if ((float)-getHeight()/2.0 < 0.0001){
+        draw_Y = "0.0";
+    }
+    else {
+        draw_Y = to_string((float) -getHeight() / 2.0);
+    }
+    string SideLength = to_string(getSideLength());
 
     string retPSCode = 
         "newpath\n" + 
