@@ -10,7 +10,7 @@ using std::to_string;
 Rotated::Rotated(const Shape &s, double rotation):_rotation(rotation),
                                                  _postScriptCode(s.getPostScriptCode())
 {
-    const double radians = (_rotation * 2.0 * PI)/360.0;
+    const double radians = (_rotation * 2.0 * M_PI)/360.0;
 
     _origWidth = s.getWidth();
     _origHeight = s.getHeight();
@@ -68,8 +68,8 @@ Layered::Layered(std::initializer_list<shared_ptr<Shape>> Shapes)
     std::string retPSCode;
     double xCenterCoord = getWidth() / 2.0;
     double yCenterCoord = getHeight() / 2.0;
-    xCenterCoord += (72*2);
-    yCenterCoord += (72*2);
+    xCenterCoord += 144;
+    yCenterCoord += 144;
 
     for(int i=0; i<vecShapes.size(); ++i)
     {   

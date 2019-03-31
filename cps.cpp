@@ -30,16 +30,16 @@ void testShapes(void)
 	Polygon pentagon1(5, 30);
 	Polygon hexagon1(6, 20);
 	Rectangle rect(144, 72);
-	//Triangle tri(20);
-	//Square sq(20);
+	Triangle tri(20);
+	Square sq(20);
 
 	Page basicShapes;
 	basicShapes.drawToPage(circle1, 40, 40);
 	basicShapes.drawToPage(pentagon1, 144, 144);
 	basicShapes.drawToPage(hexagon1, 100, 100);
 	basicShapes.drawToPage(rect, 200, 200);
-	//basicShapes.drawToPage(tri, 200, 200);
-	//basicShapes.drawToPage(sq, 300, 300);
+	basicShapes.drawToPage(tri, 200, 200);
+	basicShapes.drawToPage(sq, 300, 300);
 
 	Rotated rotPent(pentagon1, 20);
 	Rotated rotHex(hexagon1, 15);
@@ -79,7 +79,6 @@ void testShapes(void)
 	layeredShapes.drawToPage(layer, 144, 144);
 	layeredShapes.drawToPage(layer2, 4*72, 4*72);
 	cout << layer.getPostScriptCode() << endl;
-
 
 	Page verticalShapes;
 	Vertical vert{ vTri, vCir, vRec };

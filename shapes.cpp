@@ -58,7 +58,7 @@ string Circle::getPostScriptCode() const
     return retPSCode;
 }
 
-Polygon::Polygon(int numOfSides, double sideLength)
+Polygon::Polygon(double numOfSides, double sideLength)
 {
     _numOfSides = numOfSides;
     _sideLength = sideLength;
@@ -71,12 +71,12 @@ Polygon::Polygon(int numOfSides, double sideLength)
 
 double Polygon::calcTriHeight()
 {
-    return getTriHypot() * cos(PI/getNumOfSides());
+    return getTriHypot() * cos(M_PI/getNumOfSides());
 }
 
 double Polygon::calcTriHypot()
 {
-    return ( (getSideLength()/2.0) / (sin(PI/getNumOfSides())) );
+    return (getSideLength() / (2*sin(180/getNumOfSides() * M_PI/180)));
 }
 
 double Polygon::calcHeight()
@@ -85,7 +85,7 @@ double Polygon::calcHeight()
 
     if(sides % 2 == 0)
     {
-        return getTriHeight() * 2.0;
+        return getTriHeight() * 2;
     }
     else
     {
@@ -104,25 +104,25 @@ double Polygon::calcWidth()
 
     else if(sides % 4 == 0)
     {
-        return getTriHeight() * 2.0;
+        return getTriHeight() * 2;
     }
 
     else if(sides % 2 == 0)
     {
-        return getTriHypot() * 2.0;
+        return getTriHypot() * 2;
     }
 
     else // number of sides is odd and it's not a triangle
     {
-        double bigTriAngle = (360.0/sides) * ((sides - 1.0)/2.0);
-        return 2.0 * getTriHypot() * sin((bigTriAngle/2.0) * (PI/180));
+        double bigTriAngle = (360/sides) * ((sides - 1)/2);
+        return 2 * getTriHypot() * sin((bigTriAngle/2) * (M_PI/180));
     }
 }
 
 double Polygon::calcInnerAngle()
 {
     int sides = getNumOfSides();
-    return ((sides - 2.0) * 180) / sides;
+    return ((sides - 2) * 180) / sides;
 }
 
 int Polygon::getNumOfSides() const
@@ -156,9 +156,12 @@ string Polygon::getPostScriptCode() const
     string SideMinusOne = to_string(sideminusone);
     double roationangle = 180.0 - getInnerAngle();
     string RotationAngle = to_string(roationangle);
-    string draw_X = to_string(-getSideLength()/2.0);
-    string draw_Y = to_string(-getHeight()/2.0);
-    string SideLength = to_string(getSideLength());
+    double drawX = -getSideLength()/2.0;
+    double drawY = -getHeight()/2.0;
+    double sidelength = getSideLength();
+    string draw_X = to_string(drawX);
+    string draw_Y = to_string(drawY);
+    string SideLength = to_string(sidelength);
 
     string retPSCode = 
         "newpath\n" + 
