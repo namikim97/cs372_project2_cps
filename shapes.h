@@ -67,7 +67,7 @@ private:
 class Polygon : public Shape
 {
 public:
-    Polygon(double numOfSides, double sideLength);
+    Polygon(int numOfSides, double sideLength);
     double calcTriHeight();
     double calcTriHypot();
     double calcHeight();

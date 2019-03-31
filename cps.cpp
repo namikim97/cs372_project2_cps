@@ -76,12 +76,12 @@ void testShapes(void)
 	Layered layer2{ layRec, layCir };
 	layeredShapes.drawToPage(layer, 144, 144);
 	layeredShapes.drawToPage(layer2, 4*72, 4*72);
-	cout << layer.getPostScriptCode() << endl;
+	//cout << layer.getPostScriptCode() << endl;
 
 	Page verticalShapes;
 	Vertical vert{ vRec, vCir, vCir, vCir, vRec };
 	verticalShapes.drawToPage(vert, 100, 200);
-	cout << vert.getPostScriptCode() << endl;
+	//cout << vert.getPostScriptCode() << endl;
 
 	//Page horizShapes;
 	//Vertical horiz{ vRec, vCir, vCir, vCir, vRec };
