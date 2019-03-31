@@ -27,8 +27,6 @@ using std::make_shared;
 
 //const double PI = 4*atan(1);
 
-const double FOUR = 4.0;
-const double THREE = 3.0;
 
 // Nami
 class Shape
@@ -112,14 +110,14 @@ public:
 class Square : public Polygon
 {
 public:
-    Square(double sideLength): Polygon(FOUR, sideLength){};
+    explicit Square(double sideLength): Polygon(4, sideLength){}; //4 is an int, # of sides in polygon
 };
 
 // Alex
 class Triangle : public Polygon
 {
 public:
-    Triangle(double sideLength): Polygon(THREE, sideLength){};
+    explicit Triangle(double sideLength): Polygon(3, sideLength){}; //3 is an int,# of sides in polygon
 };
 
 #endif //CPS_SHAPES_H

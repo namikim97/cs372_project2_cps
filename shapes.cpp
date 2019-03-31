@@ -29,7 +29,7 @@ void Shape::setWidth(double width)
 string Shape::drawShape(const Shape &s, int x, int y)
 {
     string retPSCode;
-
+//TODO: The problem with heights for polygons with odd numbers of sides is in the to_string(y) below.
     retPSCode = "gsave\n" + to_string(x) + " " + to_string(y) +
                 " translate\n" + s.getPostScriptCode() + 
                 "\nstroke\ngrestore\n";
@@ -72,27 +72,28 @@ Polygon::Polygon(int numOfSides, double sideLength)
 
 double Polygon::calcTriHeight()
 {
-    double test1 = getTriHypot() * std::cos(M_PI/getNumOfSides()); ////////////////////////debugging
-    return getTriHypot() * std::cos(3.14/getNumOfSides());
+    return getTriHypot() * std::cos(M_PI/getNumOfSides());
 }
 
 double Polygon::calcTriHypot()
 {
-    double test = (getSideLength()/2.0) / (std::sin(M_PI/getNumOfSides())); //////////////////////debugging
     return ( (getSideLength()/2.0) / (std::sin(M_PI/getNumOfSides())) );
 }
 
 double Polygon::calcHeight()
 {
     int sides = getNumOfSides();
-
     if(sides % 2 == 0)
     {
         return getTriHeight() * 2.0;
     }
     else
     {
-        return getTriHeight() + getTriHypot();
+        auto h = getTriHeight() + getTriHypot();
+        if (h < 0.001 && h > -0.001){
+            h = 0.0;
+        }
+        return h;
     }
 }
 
