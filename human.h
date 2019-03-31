@@ -28,14 +28,17 @@ public:
     void initializeLegs();
     string getHeadPSCode() const;
     string getTorsoPSCode() const;
+    string getArmsPSCode() const;
+    string getLegsPSCode() const;
     string getPostScriptCode() const override;
     int getRandomInt(unsigned int, unsigned int);
 
 private:
     unique_ptr<Shape> _head;
     unique_ptr<Shape> _torso;
-    vector<unique_ptr<Shape>> _arms;
-    vector<unique_ptr<Shape>> _legs;
+    unique_ptr<Shape> _leftArm;
+    unique_ptr<Shape> _rightArm;
+    unique_ptr<Shape> _legs;
 
     double _height;
     double _width;

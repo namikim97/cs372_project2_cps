@@ -6,6 +6,8 @@ Human::Human(double height, double obesity)
     : _height(height), _obesity(obesity), _bodyUnit(height/8) {
     initializeHead();
     initializeTorso();
+    initializeArms();
+    initializeLegs();
 }
 
 double Human::getHeight() const {
@@ -28,10 +30,10 @@ double Human::getObesity() const {
     return _obesity;
 }
 
-// Head can be a CPS circle or [3-8] sided polygon.
+// Head can be a CPS circle or [6-12] sided polygon.
 void Human::initializeHead() {
-    auto headType = getRandomInt(2, 8);
-    if(headType == 2)
+    auto headType = getRandomInt(5, 12);
+    if(headType == 5)
         _head = unique_ptr<Shape>
                 (new Scaled(Circle(0.5*getUnit()), getObesity(), 1));
     else
@@ -52,27 +54,61 @@ void Human::initializeTorso() {
 
 void Human::initializeArms() {
     auto armType = getRandomInt(1, 2);
-    // TODO
+
+    _leftArm = unique_ptr<Shape>
+                (new Rotated(Rectangle(0.5*getUnit(), 2*getUnit()), 90));
+    _rightArm = unique_ptr<Shape>
+                (new Rotated(Rectangle(0.5*getUnit(), 2*getUnit()), 270));
 }
 
 void Human::initializeLegs() {
-    // TODO
+    auto legType = getRandomInt(1, 2);
+
 }
 
 string Human::getHeadPSCode() const {
-    return _head->getPostScriptCode();
+    string PostScriptCode = "gsave\n" +
+                            _head->getPostScriptCode() +
+                            "stroke\ngrestore\n";
+    return PostScriptCode;
 }
 
 string Human::getTorsoPSCode() const {
-    return _torso->getPostScriptCode();
+    double headToTorso = -1.5*getUnit();
+    string PostScriptCode = "gsave\n0 " + to_string(headToTorso) + " translate\n" +
+                            _torso->getPostScriptCode() +
+                            "stroke\ngrestore\n";
+    return PostScriptCode;
+}
+
+string Human::getArmsPSCode() const {
+    double torsoToArm = -getUnit();
+    double headToArm = -.25*getUnit();
+    string PostScriptCode = "gsave\n" +
+                            to_string(torsoToArm) + " " + to_string(headToArm) +
+                            " translate\n" +
+                            _leftArm->getPostScriptCode() +
+                            "stroke\ngrestore\n";
+    torsoToArm = getUnit();
+    PostScriptCode += "gsave\n" +
+                      to_string(torsoToArm) + " " + to_string(headToArm) +
+                      " translate\n" +
+                      _rightArm->getPostScriptCode() +
+                      "stroke\ngrestore\n";
+
+    return PostScriptCode;
+}
+
+string Human::getLegsPSCode() const {
+    string PostScriptCode = "dummy";
+
+    return PostScriptCode;
 }
 
 string Human::getPostScriptCode() const {
-    string PostScriptCode = "gsave\n" + getHeadPSCode() + "fill\ngrestore\n";
-    double headToTorso = -2*getUnit();
-    PostScriptCode += "gsave\n0 " + to_string(headToTorso) + " translate\n" +
-                      getTorsoPSCode() + "fill\ngrestore\n";
-
+    string PostScriptCode = getHeadPSCode() +
+                            getTorsoPSCode() +
+                            getArmsPSCode();
     return PostScriptCode;
 }
 
