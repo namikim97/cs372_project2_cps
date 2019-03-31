@@ -89,7 +89,11 @@ double Polygon::calcHeight()
     }
     else
     {
-        return getTriHeight() + getTriHypot();
+        auto h = getTriHeight() + getTriHypot();
+        if (h < 0.001 && h > -0.001){
+            h = 0.0;
+        }
+        return h;
     }
 }
 

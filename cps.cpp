@@ -77,9 +77,10 @@ void testShapes(void)
 	auto layCir = make_shared<Circle>(20);
 	auto layRec = make_shared<Rectangle>(40, 20);
 	auto layPent = make_shared<Polygon>(5, 20);
+	auto layHex = make_shared<Polygon>(6, 25);
 
 	Page layeredShapes;
-	Layered layer{ layTri, layCir, layRec, layPent};
+	Layered layer{ layTri, layCir, layHex, layRec, layPent};
 	Layered layer2{ layRec, layCir };
 	layeredShapes.drawToPage(layer, 144, 144);
 	layeredShapes.drawToPage(layer2, 4*72, 4*72);
