@@ -29,16 +29,16 @@ void testShapes(void)
 	Polygon hexagon1(6, 20);
 	Rectangle rect(144, 72);
 	// Hey Alex you can uncomment the last two shapes when you're done writing them!
-	//Triangle tri(3, 20);
-	//Square sq(20, 20);
+	Triangle tri(20);
+	Square sq(20);
 
 	Page basicShapes;
 	basicShapes.drawToPage(circle1, 40, 40);
 	basicShapes.drawToPage(pentagon1, 144, 144);
 	basicShapes.drawToPage(hexagon1, 100, 100);
 	basicShapes.drawToPage(rect, 200, 200);
-	// basicShapes.drawToPage(tri, 200, 200);
-	// basicShapes.drawToPage(sq, 300, 300);
+	basicShapes.drawToPage(tri, 200, 200);
+	basicShapes.drawToPage(sq, 300, 300);
 
 	Rotated rotPent(pentagon1, 20);
 	Rotated rotHex(hexagon1, 15);

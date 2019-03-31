@@ -110,7 +110,6 @@ class Square : public Polygon
 {
 public:
     Square(int sideLength): Polygon(4, sideLength){};
-
 };
 
 // Alex
