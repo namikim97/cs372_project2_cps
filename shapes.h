@@ -119,16 +119,19 @@ public:
     explicit Triangle(double sideLength): Polygon(3, sideLength){}; //3 is an int,# of sides in polygon
 };
 
-
-
-class RainbowSnowman : public Shape
+class RainbowBall : public Shape
 {
 public:
-    explicit RainbowSnowman(double radius);;
-    string getPostScriptCode() const override; //may change _radius so not const
+    explicit RainbowBall(double radius, double r, double g, double b);
+    string getPostScriptCode() const override;
 
 private:
+    double _r;
+    double _g;
+    double _b;
     double _radius;
 };
+
+
 
 #endif //CPS_SHAPES_H

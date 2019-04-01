@@ -70,14 +70,15 @@ Polygon::Polygon(int numOfSides, double sideLength)
     setWidth(calcWidth());
 }
 
+
 double Polygon::calcTriHeight()
 {
-    return getTriHypot() * std::cos(M_PI/getNumOfSides());
+    return (getTriHypot() * std::cos(M_PI/getNumOfSides()))*2;
 }
 
 double Polygon::calcTriHypot()
 {
-    return ( (getSideLength()/2.0) / (std::sin(M_PI/getNumOfSides())) );
+    return ( (getSideLength()/1.0) / (std::sin(M_PI/getNumOfSides())) );
 }
 
 double Polygon::calcHeight()
@@ -85,7 +86,7 @@ double Polygon::calcHeight()
     int sides = getNumOfSides();
     if(sides % 2 == 0)
     {
-        return getTriHeight() * 2.0;
+        return getTriHeight() * 1.0;
     }
     else
     {
@@ -164,11 +165,11 @@ string Polygon::getPostScriptCode() const
     string draw_X = to_string(-getSideLength()/2.0);
     //string draw_Y = to_string((float) -getHeight() / 2.0);
     string draw_Y;
-    if ((float)-getHeight()/2.0 < 0.0001){
+    if ((float)-getHeight()/2.0 < 0.01){
         draw_Y = "0.0";
     }
     else {
-        draw_Y = to_string((float) -getHeight() / 2.0);
+        draw_Y = to_string((float) -getHeight());
     }
     string SideLength = to_string(getSideLength());
 
@@ -221,46 +222,32 @@ string Rectangle::getPostScriptCode() const {
     return retPSCode;
 }
 
-//due to shape complexity, a radius < 35.0 will be converted to 35.0
-RainbowSnowman::RainbowSnowman(double radius) : _radius{radius}{
-    if (_radius < 35.0){
-        _radius = 35.0;
-    }
-    setHeight(radius * 2.0 * 1.75);
-    setWidth(radius * 2.0);
+RainbowBall::RainbowBall(double radius, double r, double g, double b): _radius(radius), _r{r}, _g{g}, _b{b} {
+    setHeight(_radius * 2.0);
+    setWidth(_radius * 2.0);
 }
 
-string RainbowSnowman::getPostScriptCode() const {
+string RainbowBall::getPostScriptCode() const {
     string retPsCode = "newpath\n"
-            "/snowY 325 def\n"
-            "/s " + to_string((int)_radius) + " def\n" +
-            "3 {\n"
-            "        /r1 0 def\n"
-            "        /g1 0.15 def\n"
-            "        /b1 0.5 def\n"
-            "        gsave\n"
-            "        425 snowY translate\n"
-            "        0 30 360 {\n"
-            "        /r1 r1 0.1 add def\n"
-            "        g1 g1 0.1 sub def\n"
-            "        b1 b1 0.05 add def\n"
-            "                gsave\n"
-            "                rotate\n"
-            "                r1 g1 b1 setrgbcolor\n"
-            "                s 3 s 0 360 arc closepath stroke\n"
-            "                grestore\n"
-            "        } for\n"
-            "        grestore\n"
-            "        /oldPlusNewRadius s s add def\n"
-            "        /s s 15 sub def\n"
-            "        2 {\n"
-            "                /oldPlusNewRadius oldPlusNewRadius s add def\n"
-            "        } repeat\n"
-            "        /snowY snowY oldPlusNewRadius add def\n"
-            "} repeat\n";
+                       "/s " + to_string((int)(_radius/2.0)) + " def\n" +
+                       "/r1 " + to_string(_r) + " def\n" +
+                       "/g1 " + to_string(_g) + " def\n" +
+                       "/b1 " + to_string(_b) + " def\n" +
+                       "gsave\n"
+                       "0 " + to_string((int)(_radius)) + " translate\n"
+                       "0 30 360 {\n"
+                       "        /r1 r1 0.1 add def\n"
+                       "        g1 g1 0.1 sub def\n"
+                       "        b1 b1 0.05 add def\n"
+                       "        gsave\n"
+                       "        rotate\n"
+                       "        r1 g1 b1 setrgbcolor\n"
+                       "        s 3 s 0 360 arc closepath stroke\n"
+                       "        grestore\n"
+                       "} for\n"
+                       "grestore\n";
 
     return retPsCode;
-
 }
 
 
@@ -286,4 +273,5 @@ string Spacer::getPostScriptCode() const {
 
     return PostScriptCode;
 }
+
 

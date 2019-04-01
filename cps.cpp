@@ -67,11 +67,11 @@ void testShapes(void)
     auto c = make_shared<Circle>(20);
     auto d = make_shared<Polygon>(5, 20);
 
-    auto vTri = make_shared<Triangle>(10);
+    auto vTri = make_shared<Triangle>(30);
 	auto vCir = make_shared<Circle>(10);
 	auto vRec = make_shared<Rectangle>(40, 20);
 
-	auto hTri = make_shared<Triangle>(10);
+	auto hTri = make_shared<Triangle>(30);
 	auto hCir = make_shared<Circle>(10);
 	auto hRec = make_shared<Rectangle>(40, 20);
 
@@ -82,9 +82,16 @@ void testShapes(void)
 	auto layPent = make_shared<Polygon>(5, 20);
 	auto layHex = make_shared<Polygon>(6, 25);
 
-	RainbowSnowman sm(60.0);
-	Page snowMan;
-	snowMan.drawToPage(sm, 40, 40);
+	RainbowBall ball(40.0, 0.0, 0.15, 0.5);
+	RainbowBall ball1(60.0, 0.1, 0.0, 0.2);
+	RainbowBall ball2(20.0, 0.2, 0.4, 0.0);
+	RainbowBall ball3(80.0, 0.0, 1.0, 0.5);
+	Page rBall;
+	auto vB = make_shared<RainbowBall>(40.0, 0.0, 0.15, 0.5);
+	rBall.drawToPage(ball, 100, 150);
+	rBall.drawToPage(ball1, 350, 300);
+	rBall.drawToPage(ball2, 300, 200);
+	rBall.drawToPage(ball3, 150, 250);
 
 
 	Page layeredShapes;
@@ -94,8 +101,9 @@ void testShapes(void)
 	layeredShapes.drawToPage(layer, 144, 144);
 	layeredShapes.drawToPage(layer2, 4*72, 4*72);
 	layeredShapes.drawToPage(layer3, 6*72, 6*72);
+
 	Page verticalShapes;
-	Vertical vert{ vRec, vCir, vCir, vRec };
+	Vertical vert{ vB, vRec, vCir, vCir, vRec };
 	verticalShapes.drawToPage(vert, 100, 200);
 	cout << vert.getPostScriptCode() << endl;
 
@@ -112,7 +120,7 @@ void testShapes(void)
 
 	PSOutput output;
 	output.addPage(basicShapes);
-    output.addPage(snowMan);
+	output.addPage(rBall);
 	output.addPage(rotatedShapes);
 	output.addPage(scaledShapes);
 	output.addPage(layeredShapes);

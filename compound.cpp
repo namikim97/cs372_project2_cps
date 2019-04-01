@@ -68,8 +68,8 @@ Layered::Layered(std::initializer_list<shared_ptr<Shape>> Shapes)
     std::string retPSCode;
     double xCenterCoord = getWidth() / 2.0;
     double yCenterCoord = getHeight() / 2.0;
-    xCenterCoord += 144;
-    yCenterCoord += 144;
+    //xCenterCoord += 144;
+    //yCenterCoord += 144;
 
     for(int i=0; i<vecShapes.size(); ++i)
     {   
