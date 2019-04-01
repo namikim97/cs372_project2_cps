@@ -96,7 +96,7 @@ void testShapes(void)
 
 	Page layeredShapes;
 	Layered layer{ layCir, layRec };
-	Layered layer2{ layRec, layCir };
+	Layered layer2{ layRec, layCir, layHex, layTri };
 	Layered layer3{ layHex, layTri };
 	layeredShapes.drawToPage(layer, 144, 144);
 	layeredShapes.drawToPage(layer2, 4*72, 4*72);
