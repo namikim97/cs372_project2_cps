@@ -95,14 +95,14 @@ void testShapes(void)
 	Page verticalShapes;
 	Vertical vert{ vRec, vCir, vCir, vRec };
 	verticalShapes.drawToPage(vert, 100, 200);
-	//cout << vert.getPostScriptCode() << endl;
+	cout << vert.getPostScriptCode() << endl;
 
-/*
+
 	Page horizShapes;
-	Vertical horiz{ hRec, hCir, hCir, hCir, hRec };
-	horizShapes.drawToPage(vert, 300, 200);
+	Horizontal horiz{ hRec, hCir, hCir, hCir, hRec };
+	horizShapes.drawToPage(horiz, 200, 200);
 	cout << horiz.getPostScriptCode() << endl;
-*/
+
 
 	Human human(360, 1);
 	Page humanShapes;
@@ -115,7 +115,7 @@ void testShapes(void)
 	output.addPage(scaledShapes);
 	output.addPage(layeredShapes);
 	output.addPage(verticalShapes);
-	//output.addPage(horizShapes);
+	output.addPage(horizShapes);
 	output.addPage(humanShapes);
 	cout << "Testing file output" << endl;
 	output.PSOutput_File("testShapes.ps");

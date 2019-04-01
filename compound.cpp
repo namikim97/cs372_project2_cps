@@ -146,7 +146,7 @@ Horizontal::Horizontal(std::initializer_list<shared_ptr<Shape>> Shapes)
             xCenterCoord -= ((vecShapes[i]->getWidth() / 2.0) + (vecShapes[i - 1]->getWidth() / 2.0));
 
         }
-        retPSCode += drawShape(*vecShapes[i], 0, (int)xCenterCoord);
+        retPSCode += drawShape(*vecShapes[i], (int)xCenterCoord, 0);
     }
     _postScriptCode = retPSCode;
 }
