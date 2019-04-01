@@ -73,7 +73,7 @@ void Human::initializeLegs() {
 string Human::getHeadPSCode() const {
     string PostScriptCode = "gsave\n" +
                             _head->getPostScriptCode() +
-                            "stroke\ngrestore\n";
+                            "fill\ngrestore\n";
     return PostScriptCode;
 }
 
@@ -81,7 +81,7 @@ string Human::getTorsoPSCode() const {
     double headToTorso = -1.5*getUnit();
     string PostScriptCode = "gsave\n0 " + to_string(headToTorso) + " translate\n" +
                             _torso->getPostScriptCode() +
-                            "stroke\ngrestore\n";
+                            "fill\ngrestore\n";
     return PostScriptCode;
 }
 
@@ -92,19 +92,18 @@ string Human::getArmsPSCode() const {
                             to_string(torsoToArmX) + " " + to_string(headToArmY) +
                             " translate\n" +
                             _leftArm->getPostScriptCode() +
-                            "stroke\ngrestore\n";
+                            "fill\ngrestore\n";
     torsoToArmX = getUnit();
     PostScriptCode += "gsave\n" +
                       to_string(torsoToArmX) + " " + to_string(headToArmY) +
                       " translate\n" +
                       _rightArm->getPostScriptCode() +
-                      "stroke\ngrestore\n";
+                      "fill\ngrestore\n";
 
     return PostScriptCode;
 }
 
 string Human::getLegsPSCode() const {
-    // TODO
     double torsoToLegX = -getUnit();
     double torsoToLegY = -3*getUnit();
 
@@ -112,13 +111,13 @@ string Human::getLegsPSCode() const {
                             to_string(torsoToLegX) + " " + to_string(torsoToLegY) +
                             " translate\n" +
                             _leftLeg->getPostScriptCode() +
-                            "stroke\ngrestore\n";
+                            "fill\ngrestore\n";
     torsoToLegX = getUnit();
     PostScriptCode += "gsave\n" +
                       to_string(torsoToLegX) + " " + to_string(torsoToLegY) +
                       " translate\n" +
                       _rightLeg->getPostScriptCode() +
-                      "stroke\ngrestore\n";
+                      "fill\ngrestore\n";
 
     return PostScriptCode;
 }
