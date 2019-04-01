@@ -14,6 +14,7 @@ For UAF CS372 Software Construction Spring 2019.
 * **Spacer**(double **width**, double **height**) - Creates a spacer(rectangle) with given width and height that is not drawn to the page.
 * **Square**(double **sideLength**) - Creates a square with given side length.
 * **Triangle**(double **sideLength**) - Creates a triangle with given side length.
+* **RainbowBall**(double **radius,** double **r,** double **g,** double **b**) - Creates a spirograph-like circle in a user controlled color gradient.
 #### Compound Shapes:
 Compound shapes can be built from basic shapes or compound shapes themselves.
 * **Rotated**(Shape **shape**, double **RotationAngle**) - Creates a given shape rotated counterclockwise by the given angle.
@@ -41,7 +42,7 @@ output.PSOutput_File("shapes.ps");
 ### Files:
 * cps.cpp - Main File. Includes a shapes-to-PostScript testing/drawing strategy with page.cpp/h.
 * cpsTests.cpp - Catch2 tests for Shape classes.
-* shapes.cpp/h - Source/Header file for Shape classes. Contains derived basic shapes and rainbow snowmen.
+* shapes.cpp/h - Source/Header file for Shape classes. Contains derived basic shapes and rainbow ball.
 * compound.cpp/h - Source/Header file for Shape classes. Contains derived compound shapes.
 * page.cpp/h - Source/Header file for Page class. Contains framework for drawing shapes to a page in PostScript.
 * human.cpp/h - Source/Header file for Human class. Class for drawing randomized figures.
