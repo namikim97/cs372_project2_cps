@@ -2,8 +2,10 @@
 // Project 2 for CS372
 // Alex L, Simeon N, Nami K
 // Created: 20 Mar 2019
-// Modified: 26 Mar 2019
+// Modified: 31 Mar 2019
 //
+// Description of this project can be found at:
+// https://github.com/namikim97/cs372_project2_cps
 // CPS Main
 
 

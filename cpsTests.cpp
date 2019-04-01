@@ -15,61 +15,6 @@ using std::make_unique;
 using std::make_shared;
 using std::shared_ptr;
 
-TEST_CASE( "Shape: Rectangle ") {
-    double width = 72;
-    double height = 18;
-
-    class Rectangle rect(width, height);
-    SECTION( "Rectangle: ctor -> Width = 72, Height = 18" ) {
-        REQUIRE( rect.getWidth() == width );
-        REQUIRE( rect.getHeight() == height );
-    }
-/*//TODO: change test to match new version of getPostScriptCode
-    SECTION( "Rectangle: Generates correct PostScript code" ) {
-        double halfWidth = width/2, halfHeight = height/2;
-        string originX = "x " + to_string(halfWidth) + " sub";
-        string originY = "y " + to_string(halfHeight) + " sub";
-        string strWidth = to_string(width), strHeight = to_string(height);
-        string originXWidthAdd = originX + " " + strWidth + " add ";
-        string originYHeightAdd = originY + " " + strHeight + " add ";
-
-        REQUIRE( rect.getPostScriptCode() == "newpath\n" +
-                                             originX + " " + originY + " moveto\n" +
-                                             originXWidthAdd + originY + " lineto\n" +
-                                             originXWidthAdd + originYHeightAdd + " lineto\n" +
-                                             originX + " " + originYHeightAdd + " lineto\n" +
-                                             "closepath\n" +
-                                             "stroke\n" );
-    }*/
-}
-
-TEST_CASE( "Shape: Spacer ") {
-    double width = 72;
-    double height = 18;
-
-    class Spacer space(width, height);
-    SECTION( "Spacer: ctor -> Width = 72, Height = 18" ) {
-        REQUIRE( space.getWidth() == width );
-        REQUIRE( space.getHeight() == height );
-    }
-    //TODO: change test to match new version of getPostScriptCode
-    /*SECTION( "Spacer: Generates correct PostScript code" ) {
-        double halfWidth = width/2, halfHeight = height/2;
-        string originX = "x " + to_string(halfWidth) + " sub";
-        string originY = "y " + to_string(halfHeight) + " sub";
-        string strWidth = to_string(width), strHeight = to_string(height);
-        string originXWidthAdd = originX + " " + strWidth + " add ";
-        string originYHeightAdd = originY + " " + strHeight + " add ";
-
-        REQUIRE( space.getPostScriptCode() == "newpath\n" +
-                                              originX + " " + originY + " moveto\n" +
-                                              originXWidthAdd + originY + " lineto\n" +
-                                              originXWidthAdd + originYHeightAdd + " lineto\n" +
-                                              originX + " " + originYHeightAdd + " lineto\n" +
-                                              "closepath\n" );
-    }*/
-}
-
 TEST_CASE( "Can make a circle", "[Circle]" ) {
     class Circle cir(20);
     REQUIRE( (cir.getRadius()) == 20);
@@ -100,6 +45,28 @@ TEST_CASE( "Can make a triangle", "[Triangle]" ) {
     REQUIRE( (tri.calcTriHypot()) == 2 / (sin(M_PI/3)));
     //REQUIRE( (tri.calcTriHeight()) ==  tri.calcTriHypot() * cos(M_PI)/3); //this assertion failing
 
+}
+
+TEST_CASE( "Shape: Rectangle ") {
+    double width = 72;
+    double height = 18;
+
+    class Rectangle rect(width, height);
+    SECTION( "Rectangle: ctor -> Width = 72, Height = 18" ) {
+        REQUIRE( rect.getWidth() == width );
+        REQUIRE( rect.getHeight() == height );
+    }
+}
+
+TEST_CASE( "Shape: Spacer ") {
+    double width = 72;
+    double height = 18;
+
+    class Spacer space(width, height);
+    SECTION( "Spacer: ctor -> Width = 72, Height = 18" ) {
+        REQUIRE( space.getWidth() == width );
+        REQUIRE( space.getHeight() == height );
+    }
 }
 
 TEST_CASE( "Compound Shape: Vertical") {
