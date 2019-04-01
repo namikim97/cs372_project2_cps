@@ -86,12 +86,12 @@ void testShapes(void)
 
 
 	Page layeredShapes;
-	Layered layer{ layTri, layCir, layHex, layRec, layPent};
+	Layered layer{ layCir, layRec };
 	Layered layer2{ layRec, layCir };
+	Layered layer3{ layHex, layTri };
 	layeredShapes.drawToPage(layer, 144, 144);
 	layeredShapes.drawToPage(layer2, 4*72, 4*72);
-	//cout << layer.getPostScriptCode() << endl;
-
+	layeredShapes.drawToPage(layer3, 6*72, 6*72);
 	Page verticalShapes;
 	Vertical vert{ vRec, vCir, vCir, vRec };
 	verticalShapes.drawToPage(vert, 100, 200);
