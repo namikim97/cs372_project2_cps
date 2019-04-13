@@ -14,6 +14,8 @@
 
 // Compound Shapes
 
+
+
 class Rotated : public Shape
 {
 public:
@@ -41,38 +43,48 @@ private:
     std::string _postScriptCode;
 };
 
-class Layered : public Shape
+class Compound : public Shape
 {
 public:
-    Layered(std::initializer_list<shared_ptr<Shape>> Shapes);
+    Compound(std::initializer_list<shared_ptr<Shape>> shapes);;
+    void setHeightWidth();
+    std::string getPostScriptCode() const override;
 
-    string getPostScriptCode() const override;
+    virtual std::string genPSCode() const = 0;
 
-private:
+protected:
+    //std::initializer_list<shared_ptr<Shape>> _shapes;
+    std::vector<shared_ptr<Shape>> _shapes;
     std::string _postScriptCode;
+private:
+    double _height = 0;
+    double _width = 0;
 };
 
 
-
-
-class Vertical : public Shape
+class Layered : public Compound
 {
 public:
-    Vertical(std::initializer_list<shared_ptr<Shape>> Shapes);
+    using Compound::Compound;
 
-    string getPostScriptCode() const override;
-private:
-    std::string _postScriptCode;
+    std::string genPSCode() const override;
 };
 
-class Horizontal : public Shape
+
+class Vertical : public Compound
 {
 public:
-    Horizontal(std::initializer_list<shared_ptr<Shape>> Shapes);
+    using Compound::Compound;
 
-    string getPostScriptCode() const override;
-private:
-    std::string _postScriptCode;
+    std::string genPSCode() const override;
+};
+
+class Horizontal : public Compound
+{
+public:
+    using Compound::Compound;
+
+    std::string genPSCode() const override;
 };
 
 #endif //CPS_COMPOUND_H

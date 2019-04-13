@@ -44,7 +44,7 @@ private:
 protected:
     void setHeight(double height);
     void setWidth(double width);
-    std::string drawShape(const Shape &s, int x, int y);
+    std::string drawShape(const Shape &s, int x, int y) const;
 };
 
 // Basic Shapes

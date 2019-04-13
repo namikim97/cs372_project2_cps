@@ -26,8 +26,7 @@ void Shape::setWidth(double width)
     _width = width;
 }
 
-string Shape::drawShape(const Shape &s, int x, int y)
-{
+string Shape::drawShape(const Shape &s, int x, int y) const {
     string retPSCode;
 //TODO: The problem with heights for polygons with odd numbers of sides is in the to_string(y) below.
     retPSCode = "gsave\n" + to_string(x) + " " + to_string(y) +

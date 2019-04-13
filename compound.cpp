@@ -47,117 +47,71 @@ string Scaled::getPostScriptCode() const
     return retPSCode;
 }
 
-Layered::Layered(std::initializer_list<shared_ptr<Shape>> Shapes)
-{
-    for(const auto &i : Shapes)
+
+void Compound::setHeightWidth() {
+    for(const auto &i : _shapes)
     {
-        if(getWidth() < i->getWidth())
+        if(_width < i->getWidth())
         {
-            setWidth(i->getWidth());
+            _width = i->getWidth();
         }
-        if(getHeight() < i->getHeight())
+        if(_height < i->getHeight())
         {
-            setHeight(i->getHeight());
+            _height = i->getHeight();
         }
         else
         {}
     }
+}
 
-    std::vector<shared_ptr<Shape>> vecShapes(Shapes.begin(), Shapes.end());
+Compound::Compound(std::initializer_list<shared_ptr<Shape>> shapes){
+    std::vector<shared_ptr<Shape>> vecShapes(shapes.begin(), shapes.end());
+    _shapes = vecShapes;
+    setHeightWidth();
+}
+
+std::string Compound::getPostScriptCode() const {
+    return genPSCode();
+}
+
+std::string Layered::genPSCode() const {
+   // std::vector<shared_ptr<Shape>> vecShapes(_shapes.begin(), _shapes.end());
 
     std::string retPSCode;
     double xCenterCoord = getWidth() / 2.0;
     double yCenterCoord = getHeight() / 2.0;
-    //xCenterCoord += 144;
-    //yCenterCoord += 144;
 
-    for(int i=0; i<vecShapes.size(); ++i)
-    {   
-        yCenterCoord -= vecShapes[i]->getHeight() / 2.0;
-        xCenterCoord -= vecShapes[i]->getWidth() / 2.0;
-        retPSCode += drawShape(*vecShapes[i], 0, 0);
+    for (auto &vecShape : _shapes) {
+        yCenterCoord -= vecShape->getHeight() / 2.0;
+        xCenterCoord -= vecShape->getWidth() / 2.0;
+        retPSCode += drawShape(*vecShape, 0, 0);
     }
-
-    _postScriptCode = retPSCode;
+    return retPSCode;
 }
 
-string Layered::getPostScriptCode() const
-{
-    return _postScriptCode;
-}
-
-Vertical::Vertical(std::initializer_list<shared_ptr<Shape>> Shapes)
-{
-    for(const auto &i : Shapes)
-    {
-        if(getWidth() < i->getWidth())
-        {
-            setWidth(i->getWidth());
-        }
-        if(getHeight() < i->getHeight())
-        {
-            setHeight(i->getHeight());
-        }
-        else
-        {}
-    }
-
-    std::vector<shared_ptr<Shape>> vecShapes(Shapes.begin(), Shapes.end());
+std::string Vertical::genPSCode() const {
     std::string retPSCode;
-    double yCenterCoord = (vecShapes[0]->getHeight()/2.0);
-    for(int i=0; i<vecShapes.size(); ++i)
+    double yCenterCoord = (_shapes[0]->getHeight()/2.0);
+    for(int i=0; i<_shapes.size(); ++i)
     {
         if (i > 0) {
-            yCenterCoord -= ((vecShapes[i]->getHeight() / 2.0) + (vecShapes[i - 1]->getHeight() / 2.0));
-
+            yCenterCoord -= ((_shapes[i]->getHeight() / 2.0) + (_shapes[i - 1]->getHeight() / 2.0));
         }
-        retPSCode += drawShape(*vecShapes[i], 0, (int)yCenterCoord);
+        retPSCode += drawShape(*_shapes[i], 0, (int)yCenterCoord);
     }
-    _postScriptCode = retPSCode;
+    return retPSCode;
 }
 
-string Vertical::getPostScriptCode() const
-{
-    return _postScriptCode;
-}
-
-Horizontal::Horizontal(std::initializer_list<shared_ptr<Shape>> Shapes)
-{
-    for(const auto &i : Shapes)
-    {
-        if(getWidth() < i->getWidth())
-        {
-            setWidth(i->getWidth());
-        }
-        if(getHeight() < i->getHeight())
-        {
-            setHeight(i->getHeight());
-        }
-        else
-        {}
-    }
-
-    std::vector<shared_ptr<Shape>> vecShapes(Shapes.begin(), Shapes.end());
+std::string Horizontal::genPSCode() const {
     std::string retPSCode;
-    double xCenterCoord = (vecShapes[0]->getWidth()/2.0);
-    for(int i=0; i<vecShapes.size(); ++i)
+    double xCenterCoord = (_shapes[0]->getWidth()/2.0);
+    for(int i=0; i<_shapes.size(); ++i)
     {
         if (i > 0) {
-            xCenterCoord -= ((vecShapes[i]->getWidth() / 2.0) + (vecShapes[i - 1]->getWidth() / 2.0));
-
+            xCenterCoord -= ((_shapes[i]->getWidth() / 2.0) + (_shapes[i - 1]->getWidth() / 2.0));
         }
-        retPSCode += drawShape(*vecShapes[i], (int)xCenterCoord, 0);
+        retPSCode += drawShape(*_shapes[i], (int)xCenterCoord, 0);
     }
-    _postScriptCode = retPSCode;
+
+    return retPSCode;
 }
-
-string Horizontal::getPostScriptCode() const
-{
-    return _postScriptCode;
-}
-
-
-
-
-
-
